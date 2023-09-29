@@ -277,20 +277,7 @@ OPTIONS (
 ### 4. Análise
 
 
-**1. Qual é a taxa de abandono escolar nas escolas indígenas? Este valor é mais mais ou menos elevado que escolas comuns?**
-
-<details>
-  <summary>Mostrar Resposta</summary>
-  
-<img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
-     alt="taxa_de_abandono">
-
-Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquanto nas escolas comuns é de 7.32%. Portanto, podemos concluir que a taxa de abandono escolar nas escolas indígenas é consideravelmente mais elevada do que nas escolas comuns, com 11.27% maior que escolas comuns. Isso sugere que as escolas indígenas podem enfrentar desafios adicionais ou diferentes que contribuem para uma taxa de abandono mais alta em comparação com as escolas não indígenas. É importante investigar e abordar esses desafios para melhorar o acesso e a qualidade da educação para as comunidades indígenas.
-
-</details>
-</details>
-
-**2. Onde estão localizadas as escolas em terras indigenas?**
+**1. Onde estão localizadas as escolas em terras indigenas?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -309,4 +296,32 @@ Portanto, as escolas em terras indígenas estão principalmente concentradas nos
 
 </details>
 </details>
+
+
+**2. Qual é a taxa de abandono escolar nas escolas indígenas? Este valor é mais mais ou menos elevado que escolas comuns?**
+
+<details>
+  <summary>Mostrar Resposta</summary>
+  
+<img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
+     alt="taxa_de_abandono">
+
+Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquanto nas escolas comuns é de 7.32%. Portanto, podemos concluir que a taxa de abandono escolar nas escolas indígenas é consideravelmente mais elevada do que nas escolas comuns, com 11.27% maior que escolas comuns. Isso sugere que as escolas indígenas podem enfrentar desafios adicionais ou diferentes que contribuem para uma taxa de abandono mais alta em comparação com as escolas não indígenas. É importante investigar e abordar esses desafios para melhorar o acesso e a qualidade da educação para as comunidades indígenas.
+
+</details>
+</details>
+
+
+
+**3. Qual a media de equipamentos tecnologicos por estado em escolas com educação indigena?**
+
+<details>
+  <summary>Mostrar Resposta</summary>
+
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/media_equip_escolas_por_estado.PNG" align="left"
+     alt="media_equipamentos_estado">
+
+
+Resposta: O gráfico a cima mostra a média de equipamentos tecnológicos disponíveis em escolas com educação indígena em cada estado. Santa Catarina tem a maior média, com 9 equipamentos, enquanto Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá e Maranhão têm médias muito baixas, próximas a zero. Esses números indicam a disparidade na disponibilidade de equipamentos tecnológicos em escolas indígenas em diferentes estados do Brasil.
+
 
