@@ -378,6 +378,8 @@ ORDER BY Media_Equip DESC
 
 Resposta: O gráfico a cima mostra a média de equipamentos tecnológicos disponíveis em escolas com educação indígena em cada estado. Santa Catarina tem a maior média, com 9 equipamentos, enquanto Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá e Maranhão têm médias muito baixas, próximas a zero. Esses números indicam a disparidade na disponibilidade de equipamentos tecnológicos em escolas indígenas em diferentes estados do Brasil.
 
+</details>
+</details>
 
 **4. Qual a porcentagem de escolas em locais indigenas que possuem internet por estado?**
 
@@ -402,6 +404,8 @@ ORDER BY PORCENTAGEM_COM_INTERNET DESC
 
 Resposta: Os números a cima números representam a porcentagem de escolas indígenas em cada estado que têm acesso à internet. Enquanto alguns estados, como Paraná e Goiás, têm 100% de suas escolas indígenas com acesso à internet, outros, como Piauí e Acre, têm uma porcentagem muito baixa ou mesmo nula de escolas com acesso à internet. Isso reflete a variação na infraestrutura de tecnologia da informação em diferentes regiões do país e destaca a necessidade de melhorar o acesso à internet em escolas indígenas em todo o Brasil.
 
+</details>
+</details>
 
 **5. Em qual língua é ministrada as disciplinas nas escolas indígenas? Estamos mantendo as raízes das tribos em relação à língua materna?**
 
@@ -431,3 +435,6 @@ ORDER BY Lingua_indigena
   - Não aplicável sem educação indígena: 2.02% dos dados não são aplicáveis, indicando que essas escolas não oferecem educação indígena ou não forneceram informações sobre a língua de instrução.
 
   Portanto, a maioria das escolas indígenas no Brasil adota uma abordagem bilíngue, ministrando as disciplinas tanto na língua indígena quanto em português, o que reflete a importância de preservar as raízes das tribos   em relação à língua materna, ao mesmo tempo em que oferece acesso à educação em português.
+
+</details>
+</details>
