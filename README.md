@@ -273,12 +273,9 @@ OPTIONS (
 )
 ```
 
+#### 3.10 Catálogo de Dados
+Um catálogo de dados é uma ferramenta que organiza e descreve informações sobre conjuntos de dados disponíveis, fornecendo detalhes como origem, estrutura, significado e relação entre eles. É essencial para a gestão e utilização eficiente dos dados em uma organização. Abaixo está o Catálogo referente a tabela final, na camada Gold:
 
-### 4. Análise
-A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
-
-
-#### 4.1 Catálogo
 
 | id | variavel | descrição | tipo | mínimo | máximo |
 |----|----------|-----------|------|--------|--------|
@@ -313,7 +310,9 @@ A análise de dados é uma prática essencial em um mundo cada vez mais digital 
 
 
 
-#### 4.2 Perguntas
+### 4. Análise
+A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
+
 
 **1. Onde estão localizadas as escolas em terras indigenas?**
 
