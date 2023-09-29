@@ -315,8 +315,9 @@ A análise de dados é uma prática essencial em um mundo cada vez mais digital 
 
 
 #### 4. Qualidade dos Dados
-De acordo com as análises realizadas na camada Gold, ainda existem alguns problemas com sua qualidade. Alguns municípios ainda estão obtendo o valor "�" para letras com acento ou para a letra "ç". Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
-
+De acordo com as análises realizadas na camada Gold, ainda existem alguns problemas com a qualidade de dados para algumas colunas. A coluna **Nome_do_Municipio** ainda está obtendo o valor "�" para letras com acento ou para a letra "ç" ("ainda" pois este problema foi tratado na ETL da camada Bronze para Silver). Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
+s coluna **Taxa_de_Aprovacao_Educacao_Basica**, por algum motivo ao longo das ETLS, está com valores apenas nulos. Isto faz com que análises referentes a aprovação de alunos em escolas indígenas, um comparativo entre aprovações com alunos em escolas em locais indígenas e escolas comuns fique impossível de ser realizada. 
+A coluna **Salas_Existentes** está com valores nulos também, possívelmente por alguma etapa da ETL. Isto faz com que análises sobre a quantidade de alunos por sala em escolas em locais indígenas, ou verificações se a infraestrutura das escolas em locais indígenas atende a necessidade da população.
 
 
 **1. Onde estão localizadas as escolas em terras indigenas?**
