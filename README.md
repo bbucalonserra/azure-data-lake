@@ -17,8 +17,8 @@ A primeira tabela é referente a diversas informações sobre as escolas no Bras
 ### 2. Coleta
 A coleta de dados foi realizada por meio do download de duas tabelas diretamente do site oficial do governo. Essa etapa foi crucial para garantir que os dados utilizados sejam precisos e confiáveis, uma vez que as fontes governamentais são reconhecidas como uma fonte primária de informações educacionais. A decisão de obter os dados diretamente do site do governo foi tomada para garantir que as informações coletadas estejam alinhadas com as fontes oficiais disponíveis
 
-### 3. Modelagem
-
+### 3. Modelagem e Carga
+A modelagem de dados é um processo fundamental no campo da ciência da computação e da gestão de informações. A principal finalidade da modelagem de dados é garantir que os dados sejam organizados, armazenados e gerenciados de forma eficiente e precisa para atender às necessidades específicas de uma organização ou projeto. Aqui, Modelagem e Carga estão no mesmo tópico porque será utilizado diretamente um sistema de Data Lake, armazenando os dados por camadas. 
 
 #### 3.1 Definição do Sistema de Cloud Computing
 A escolha da Azure como sitema de cloud computing deste projeto foi baseada em sua reputação global como uma das principais plataformas de nuvem do mundo. Além disso, a Azure é conhecida por sua excelente integração com ferramentas amplamente utilizadas, como o Power BI, o que facilita a análise de dados. A plataforma Azure também se destaca pela sua segurança robusta e capacidade de escalabilidade, garantindo a proteção dos dados e sua flexibilidade.
@@ -27,13 +27,22 @@ A escolha da Azure como sitema de cloud computing deste projeto foi baseada em s
 Inicialmente, foi-se criado uma conta na Azure de forma gratuita com uma quantia a ser utilizada por fins acadêmicos. Aqui, foi-se criado, em ordem:
 - Um Resource Group (contêiner lógico que ajuda a gerenciar e organizar recursos relacionados no Azure)
 - Storage Account (um recurso da Azure que fornece armazenamento em nuvem de arquivos), sendo utilizado o Azure Data Lake Storage 2gen
-- Container Bronze (raw), Silver e Gold
+- Container Bronze, Silver e Gold
 
-Com isto, foi-se inseridos os dados coletados do site governo em um container chamado Bronze. Posteriormente, após a realização de ETL, os dados ficarão armazenados na camada Silver e, por fim, na camada Gold. A definição de cada camada utilizada foi:
-- Bronze: dados brutos (raw) no formato da coleta, como JSON, CSV, XLS, Parquet, etc. No caso do projeto, ambos arquivos utilizados estão em formato CSV (comma-separated values)
+Com isto, foi-se inserido os dados coletados do site governo no container Bronze. Posteriormente, após a realização de ETL, os dados ficarão armazenados na camada Silver e, por fim, na camada Gold. A definição de cada camada utilizada foi:
+- Bronze: dados brutos (raw) no formato da coleta, como JSON, CSV, XLS, Parquet
 - Silver: dados limpos e transformados, removendo colunas indesejadas, caracteres estranhos e removendo espaços
 - Gold: dados organizados, com join realizado entre tabelas caso necessário e com regras de negócios aplicados de acordo com as métricas / perguntas definidas que deverão ser respondidas
 
-#### 3.3 
+#### 3.3 ETL - Extract, Transform e Load
+Após a inserção dos dados brutos na camada Bronze, a próxima etapa é a realização das transformações nos dados. Para tal atividade, foi-se utilizado o recurso Azure Data Factory, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas.
+
+
+
+
+
+
+
+
 
 
