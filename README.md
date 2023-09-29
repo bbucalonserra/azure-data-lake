@@ -277,6 +277,44 @@ OPTIONS (
 ### 4. Análise
 A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
 
+
+#### 4.1 Catálogo
+
+| id | variavel | descrição | tipo | mínimo | máximo |
+|----|----------|-----------|------|--------|--------|
+| 1 | Ano_Censo | Ano dos dados | INT | 2022 | 2022 |
+| 2 | Região | Região | STRING | Centro-Oeste | Sul |
+| 3 | Nome_UF | Nome do distrito | STRING | Acre | Tocantins |
+| 4 | UF | Unidade Federativa | STRING | AC | TO |
+| 5 | Nome_do_Municipio | Nome do Município | STRING | Abadia de Goiás | ��leo |
+| 6 | Codigo_do_Municipio | Código do Município | INTEGER | 1100015 | 5300108 |
+| 7 | Dependencia | "1 - Federal 2 - Estadual 3 - Municipal 4 - Privada" | INTEGER | 1 | 4 |
+| 9 | Localizacao | Rural ou Urbana | STRING | Rural | Urbana |
+| 10 | Tipo_Localizacao | Rural ou Urbana | INTEGER | 0 | 1 |
+| 11 | Codigo_da_Escola | Código da Escola | INTEGER | 11000058 | 53086007 |
+| 12 | Nome_da_Escola | Nome da Escola | STRING | 0101001 ESCOLA MUNICIPAL VICENTE LICINIO CARDOSO | ZUMBI DOS PALMARES EEF |
+| 13 | Categoria_Escola_Privada | "1 - Particular 2 - Comunitária 3 - Confessional 4 - Filantrópica - Não aplicável para escolas públicas" | INTEGER | 1 | 4 |
+| 14 | Localizacao_Diferenciada | "0 - A escola não está em área de localização diferenciada 1 - Área de assentamento 2 - Terra indígena 3 - Área onde se localiza comunidade remanescente de quilombos" | INTEGER | 0 | 3 |
+| 15 | Matriculas_Educação_Basica | Quantidade de matrículas na educação básica | INTEGER | 1 | 999 |
+| 16 | Matriculas_Educacao_Basica_Feminino | Quantidade de matrículas na educação básica feminino | INTEGER | 0 | 999 |
+| 17 | Matriculas_Educacao_Basica_Masculino | Quantidade de matrículas na educação básica masculino | INTEGER | 0 | 999 |
+| 18 | Total_Equipamentos | Total de equipamentos tecnológicos | INTEGER | 0 | 99 |
+| 19 | Computadores | Total de computadores | INTEGER | null | null |
+| 20 | Computadores_Administrativos | Total de computadores administrativos | INTEGER | null | null |
+| 21 | Salas_Existentes | Quantidade de salas existentes | INTEGER | 0 | 1 |
+| 22 | Internet | Tem ou não internet (1 ou 0) | INTEGER | 0 | 1 |
+| 23 | Educacao_Indigena | "0 - Não 1 - Sim" | INTEGER | 1 | 3 |
+| 24 | Lingua_Indigena | "1 - Somente em Língua Indígena 2 - Somente em Língua Portuguesa 3 - Em Língua Indígena e em Língua Portuguesa - Não aplicável para escolas sem Educação Escolar Indígena" | INTEGER | 1 | 3 |
+| 25 | Lingua_Indigena_1 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 1 | INTEGER | 1 | 999 |
+| 26 | Lingua_Indigena_2 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 2 | INTEGER | 100 | 999 |
+| 27 | Lingua_Indigena_3 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 3 | INTEGER | 126 | 999 |
+| 28 | Material_Indigena | Instrumentos e materiais socioculturais e/ou pedagógicos em uso na escola para o desenvolvimento de atividades de ensino e aprendizagem - Indígena | INTEGER | 0 | 1 |
+| 29 | Taxa_de_Aprovacao_Educacao_Basica
+
+
+
+#### 4.2 Perguntas
+
 **1. Onde estão localizadas as escolas em terras indigenas?**
 
 <details>
