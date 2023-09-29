@@ -82,15 +82,53 @@ CREATE SCHEMA gold;
 ```
 
 ### 3.5 Análise Inicial
-No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada:
+No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
 
+**Tabela microdados_ed_basica_2022**
+Visualização da Tabela
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').display()
 ```
+Criação de View
+```py
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
+```
+**Tabela tx_rend_escolas_2022**
+Visualização da Tabela
+```py
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').display()
+```
+Criação de View
+```py
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
+```
+
+Com isto, foi-se visto algumas inconsistências nos dados, como caracteres especiais e colunas indesejadas.
+Após isto será feito o armazenamento destes dados no Schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
+
+**Tabela microdados_ed_basica_2022**
+```py
+CREATE TABLE bronze.educacao_basica_2022 USING CSV LOCATION 'abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv'
+OPTIONS (
+  header = "true",
+  delimiter = ";"
+)
+```
+**Tabela tx_rend_escolas_2022**
+```py
+CREATE TABLE bronze.rend_escolar_2022
+USING CSV LOCATION 'abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv'
+OPTIONS (
+  header = "true",
+  delimiter = ";"
+)
+```
+
+Observação: a tipologia dos dados ainda não foi definida por serem dados crus (raw). Elas serão definidas na camada Silver.
 
 
-#### 3.4 ETL - Extract, Transform e Load (Bronze - Silver)
-Após a inserção dos dados brutos na camada Bronze, a próxima etapa é a realização das transformações nos dados. Para tal atividade, foi-se utilizado o recurso `Azure Data Factory`, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas. A linguagem utilizada por este recurso é chamada de "Linguagem de Expressão de Transformação de Dados" (Data Flow Expression Language). Essa linguagem permite que você defina transformações de dados usando uma sintaxe semelhante ao SQL e inclui funções e operadores para executar operações de transformação, filtragem, projeção e muito mais. Abaixo, estão as transformações utilizadas no Data Factory:
+#### 3.6 ETL - Extract, Transform e Load (Bronze - Silver)
+Após a inserção dos dados brutos na camada Bronze, selecionado as colunas, notado algumas inconsistências nos dados e criado as tabelas, a próxima etapa é a realização das transformações. Para tal atividade, foi-se utilizado o recurso `Azure Data Factory`, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas. A linguagem utilizada por este recurso é chamada de "Linguagem de Expressão de Transformação de Dados" (Data Flow Expression Language). Essa linguagem permite que você defina transformações de dados usando uma sintaxe semelhante ao SQL e inclui funções e operadores para executar operações de transformação, filtragem, projeção e muito mais. Abaixo, estão as transformações utilizadas no Data Factory:
 
 ![ETL - Bronze para Silver](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_bronze_to_silver.PNG)
 
@@ -103,8 +141,9 @@ Descrição das transformações:
 
 
 
+#### 3.7 
 
-#### 3.5 Criação de Schema
+
 
 
 Nesta etapa, também é comum realizar análise dos dados e verificar se as transformações foram eficientes e coletar avaliações dos dados da camada Silver. Estas avaliações serão utilizadas posteriormente para a criação da camada Gold.
