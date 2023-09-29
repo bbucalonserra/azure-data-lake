@@ -34,7 +34,62 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
 - Silver: dados limpos e transformados, removendo colunas indesejadas, caracteres estranhos e removendo espaços
 - Gold: dados organizados, com join realizado entre tabelas caso necessário e com regras de negócios aplicados de acordo com as métricas / perguntas definidas que deverão ser respondidas
 
-#### 3.3 ETL - Extract, Transform e Load (Bronze - Silver)
+
+#### 3.3 Conexão Data Lake e Databricks
+Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. Para isto, será usado o recurso Azure Databricks. 
+Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
+- Databricks (plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada)
+- Registration App (entidade que representa uma aplicação ou serviço que deseja acessar os recursos na plataforma Azure. É identificação para um aplicativo ou serviço que quer fazer alterações na nuvem da Microsoft)
+- Key Vault (serviço de gerenciamento de chaves e segredos)
+
+Com os recursos criados, basta entrar no Databricks, criar um notebook e utilizar o seguinte código em `Spark`:
+
+<details>
+  <summary>Mostrar Código</summary>
+  
+```py
+service_credential = dbutils.secrets.get(scope="<scope>",key="<service-credential-key>")
+
+spark.conf.set("fs.azure.account.auth.type.<storage-account>.dfs.core.windows.net", "OAuth")
+spark.conf.set("fs.azure.account.oauth.provider.type.<storage-account>.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account>.dfs.core.windows.net", "<application-id>")
+spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account>.dfs.core.windows.net", service_credential)
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account>.dfs.core.windows.net", "https://login.microsoftonline.com/<directory-id>/oauth2/token")
+```
+
+Em que:
+- scope = secret scope, criado no próprio Databricks
+- service-credential-key = credential key do Key Vault
+- storage-account = Storage Account
+- application-id = application ID do App Registration
+- directory-id = directory ID do App Registration
+
+</details>
+</details>
+
+Feito isto, tem-se uma conexão entre o Databricks e o Data Lake. Agora já é possível criar tabelas e popula-las com os dados do Lake.
+
+
+#### 3.4 Criação de Schema
+Dentro do Databricks, por viés organizacional, será necessário criar schemas para armazenas as tabelas de análises. Será criado um Schema por camada do Data Lake. Para isto, basta abrir um notebook e utilizar os seguintes comandos em SQL:
+
+```py
+CREATE SCHEMA bronze;
+
+CREATE SCHEMA silver;
+
+CREATE SCHEMA gold;
+```
+
+### 3.5 Análise Inicial
+No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada:
+
+```py
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').display()
+```
+
+
+#### 3.4 ETL - Extract, Transform e Load (Bronze - Silver)
 Após a inserção dos dados brutos na camada Bronze, a próxima etapa é a realização das transformações nos dados. Para tal atividade, foi-se utilizado o recurso `Azure Data Factory`, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas. A linguagem utilizada por este recurso é chamada de "Linguagem de Expressão de Transformação de Dados" (Data Flow Expression Language). Essa linguagem permite que você defina transformações de dados usando uma sintaxe semelhante ao SQL e inclui funções e operadores para executar operações de transformação, filtragem, projeção e muito mais. Abaixo, estão as transformações utilizadas no Data Factory:
 
 ![ETL - Bronze para Silver](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_bronze_to_silver.PNG)
@@ -46,34 +101,11 @@ Descrição das transformações:
 - `DERIVED COLUMN` para para remoção de caracteres especiais e estranhos das colunas
 - `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Silver
 
-#### 3.4 Análise de Dados Silver
-Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. É possível realizar estas verificações no próprio `Azure Data Factory`, porém, como posteriormente será necessário realizar análises e, juntando ao fato de que a interface do `Azure Data Factory` é um pouco lenta para esta função, será usado o recurso Azure Databricks. Nesta etapa, também é comum realizar análise dos dados e verificar se as transformações foram eficientes e coletar avaliações dos dados da camada Silver. Estas avaliações serão utilizadas posteriormente para a criação da camada Gold.
-Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
-- Databricks (plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada)
-- Registration App (entidade que representa uma aplicação ou serviço que deseja acessar os recursos na plataforma Azure. É identificação para um aplicativo ou serviço que quer fazer alterações na nuvem da Microsoft)
-- Key Vault (serviço de gerenciamento de chaves e segredos)
-
-Com os recursos criados, basta entrar no Databricks, criar um notebook e utilizar o seguinte código em `Spark`:
-
-```py
-service_credential = dbutils.secrets.get(scope="<scope>",key="<service-credential-key>")
-
-spark.conf.set("fs.azure.account.auth.type.<storage-account>.dfs.core.windows.net", "OAuth")
-spark.conf.set("fs.azure.account.oauth.provider.type.<storage-account>.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
-spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account>.dfs.core.windows.net", "<application-id>")
-spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account>.dfs.core.windows.net", service_credential)
-spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account>.dfs.core.windows.net", "https://login.microsoftonline.com/<directory-id>/oauth2/token")
-```
-Em que:
-
-- scope = secret scope, criado no próprio Databricks
-- service-credential-key = credential key do Key Vault
-- storage-account = Storage Account
-- application-id = application ID do App Registration
-- directory-id = directory ID do App Registration
 
 
 
+#### 3.5 Criação de Schema
 
 
+Nesta etapa, também é comum realizar análise dos dados e verificar se as transformações foram eficientes e coletar avaliações dos dados da camada Silver. Estas avaliações serão utilizadas posteriormente para a criação da camada Gold.
 
