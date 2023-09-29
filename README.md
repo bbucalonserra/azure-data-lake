@@ -314,6 +314,11 @@ Um catálogo de dados é uma ferramenta que organiza e descreve informações so
 A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
 
 
+#### 4. Qualidade dos Dados
+De acordo com as análises realizadas na camada Gold, ainda existem alguns problemas com sua qualidade. Alguns municípios ainda estão obtendo o valor "�" para letras com acento ou para a letra "ç". Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
+
+
+
 **1. Onde estão localizadas as escolas em terras indigenas?**
 
 <details>
