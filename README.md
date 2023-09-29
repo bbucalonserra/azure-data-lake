@@ -277,5 +277,17 @@ OPTIONS (
 ### 4. Análise
 
 
+1. Qual é a taxa de abandono escolar nas escolas indígenas em relação ao total de matrículas?  Este valor é mais mais ou menos elevado que escolas comuns?
+
+<details>
+  <summary>Mostrar Resposta</summary>
+  
+<img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
+     alt="taxa_de_abandono">
+
+Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquanto nas escolas comuns é de 7.32%. Portanto, podemos concluir que a taxa de abandono escolar nas escolas indígenas é consideravelmente mais elevada do que nas escolas comuns, com 11.27% maior que escolas comuns. Isso sugere que as escolas indígenas podem enfrentar desafios adicionais ou diferentes que contribuem para uma taxa de abandono mais alta em comparação com as escolas não indígenas. É importante investigar e abordar esses desafios para melhorar o acesso e a qualidade da educação para as comunidades indígenas.
+
+</details>
+</details>
 
 
