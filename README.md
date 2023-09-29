@@ -8,7 +8,7 @@ O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educ
 ## O Projeto
 ### 1. Busca Pelos Dados
 A busca pelos dados foi realizada por meio do site do governo (https://www.gov.br/inep/pt-br/acesso-a-informacao), em que foi-se buscado tabelas referentes ao censo escolar do Brasil em 2022. Foram encontradas duas tabelas para fazer parte da análise: 
-- [Microdados do Censo Escolar da Educacao no Brasil 2022] 
+- [Microdados do Censo Escolar da Educacao no Brasil 2022](https://github.com/bbucalonserra/data_engineering/blob/main/tables_bronze/microdados_ed_basica_2022.xlsx)
 - Taxa Rendimento Escolas 2022
 
 A primeira tabela se diz referente a diversas informações 
