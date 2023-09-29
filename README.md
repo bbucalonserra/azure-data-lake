@@ -224,6 +224,52 @@ Descrição das transformações:
 - `DERIVED COLUMN` para remoção de caracteres especiais remanescentes
 - `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Gold
 
+#### 3.9 Análise Final
+Por fim, agora é possível realizar a análise final de uma forma muito mais prática, rápida e consistente, visto que apenas possuimos colunas utilizáveis e de acordo com as regras de negócio das análises. 
+
+``` py
+CREATE TABLE gold.educacao_rend_escolas_joined
+(
+  Ano_Censo INT NOT NULL,
+  Regiao STRING NOT NULL,
+  Nome_UF STRING NOT NULL,
+  UF STRING NOT NULL,
+  Nome_do_Municipio STRING,
+  Codigo_do_Municipio INTEGER,
+  Dependencia INTEGER,
+  Dependencia_Administrativa STRING,
+  Localizacao STRING,
+  Tipo_Localizacao INTEGER,
+  Codigo_da_Escola INTEGER NOT NULL,
+  Nome_da_Escola STRING,
+  Categoria_Escola_Privada INTEGER,
+  Localizacao_Diferenciada INTEGER,
+  Matriculas_Eduacao_Basica INTEGER NOT NULL,
+  Matriculas_Educacao_Basica_Femino INTEGER NOT NULL,
+  Matriculas_Educacao_Basica_Masculino INTEGER NOT NULL,
+  Total_Equipamentos INTEGER,
+  Computadores INTEGER,
+  Computadores_Administrativos INTEGER,
+  Salas_Existentes INTEGER,
+  Internet INTEGER,
+  Educacao_Indigena INTEGER,
+  Lingua_Indigena INTEGER,
+  Lingua_Indigena_1 INTEGER,
+  Lingua_Indigena_2 INTEGER,
+  Lingua_Indigena_3 INTEGER,
+  Material_Indigena INTEGER,
+  Taxa_de_Aprovacao_Educacao_Basica FLOAT, 
+  Taxa_de_Reprovacao_Educacao_Basica FLOAT,
+  Taxa_de_Abandono_Educacao_Basica FLOAT,
+  PRIMARY KEY "Codigo_da_Escola"
+)
+
+USING CSV LOCATION 'abfss://gold@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/educacao_rend_escolas_joined'
+OPTIONS (
+  header = "true",
+  delimiter = ","
+)
+```
 
 
 
