@@ -104,7 +104,7 @@ spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaob
 ```
 
 Com isto, foi-se visto algumas inconsistências nos dados, como caracteres especiais e colunas indesejadas.
-Após isto será feito o armazenamento destes dados no Schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
+Foi feito o armazenamento destes dados no Schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
 
 **Tabela microdados_ed_basica_2022**
 ```py
@@ -141,7 +141,83 @@ Descrição das transformações:
 
 
 
-#### 3.7 
+#### 3.7 Segunda Análise
+A próxima etapa é análisar os dados resultantes da ETL da camada Bronze para Silver. Para isto, será necessário criar as novas tabelas após a ETL no Databricks já com a **tipologia dos dados definida e as variáveis de null ou not null também**:
+
+**Tabela Educacao_basica_2022**
+```py
+CREATE TABLE silver.educacao_basica_2022
+  (NU_ANO_CENSO INT NOT NULL,
+  NO_REGIAO STRING NOT NULL,
+  NO_UF STRING NOT NULL,
+  NO_MESORREGIAO STRING NOT NULL,
+  NO_ENTIDADE STRING NOT NULL,
+  CO_ENTIDADE INTEGER NOT NULL,
+  TP_DEPENDENCIA INT,
+  TP_CATEGORIA_ESCOLA_PRIVADA INT,
+  TP_LOCALIZACAO INT,
+  QT_MAT_BAS INT,
+  QT_MAT_BAS_FEM INT,
+  QT_MAT_BAS_MASC INT,
+  QT_EQUIP_DVD INT,
+  QT_EQUIP_TV INT,
+  QT_EQUIP_LOUSA_DIGITAL INT,
+  QT_EQUIP_MULTIMIDIA INT,
+  QT_EQUIP_VIDEOCASSETE INT,
+  QT_EQUIP_PARABOLICA INT,
+  QT_EQUIP_COPIADORA INT,
+  QT_EQUIP_RETROPROJETOR INT,
+  QT_EQUIP_IMPRESSORA INT,
+  QT_EQUIP_IMPRESSORA_MULT INT,
+  QT_EQUIP_FAX INT,
+  QT_EQUIP_FOTO INT,
+  QT_COMPUTADOR INT,
+  QT_COMP_ADMINISTRATIVO INT,
+  QT_SALAS_EXISTENTES INT,
+  IN_INTERNET INT,
+  IN_EDUCACAO_INDIGENA INT,
+  TP_INDIGENA_LINGUA INT,
+  CO_LINGUA_INDIGENA_1 INT,
+  CO_LINGUA_INDIGENA_2 INT,
+  CO_LINGUA_INDIGENA_3 INT,
+  IN_MATERIAL_PED_INDIGENA INT)
+USING CSV LOCATION 'abfss://silver@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/educacao_basica_2022_silver'
+OPTIONS (
+  header = "true",
+  delimiter = ","
+)
+```
+
+**Tabela tx_rend_escolas_2022**
+```py
+CREATE TABLE silver.tx_rend_escolas_2022 
+(
+  Ano INT NOT NULL, 
+  Regiao STRING NOT NULL,
+  UF STRING NOT NULL,
+  Codigo_do_Municipio INT NOT NULL,
+  Nome_do_Municipio STRING,
+  Codigo_da_Escola INT NOT NULL,
+  Nome_da_Escola STRING,
+  Localizacao STRING,
+  Dependencia_Administrativa STRING,
+  Taxa_de_Aprovacao_Educacao_Basica FLOAT,
+  Taxa_de_Reprovacao_Educacao_Basica FLOAT,
+  Taxa_de_Abandono_Educacao_Basica FLOAT
+)
+USING CSV LOCATION 'abfss://silver@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022_silver'
+OPTIONS (
+  header = "true",
+  delimiter = ","
+)
+```
+
+
+
+
+
+#### 3.7 Segunda Análise
+A próxima etapa é realizar a análise dos dados resultantes da ETL da camada Bronze para Silver. Aqui, foi notado que ambas as tabelas possuem uma chave
 
 
 
