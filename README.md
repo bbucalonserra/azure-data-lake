@@ -56,16 +56,21 @@ Para criar uma conexão entre o Data Lake e o Databricks, será necessário cria
 Com os recursos criados, basta entrar no Databricks, criar um notebook e utilizar o seguinte código em `Spark`:
 
 ```py
-service_credential = 'dNn8Q~Bybs5oBQ_V~Shys-AiKM2bBxl~9vKkvcDy'
+service_credential = dbutils.secrets.get(scope="<scope>",key="<service-credential-key>")
 
-spark.conf.set("fs.azure.account.auth.type.educacaobasica.dfs.core.windows.net", "OAuth")
-spark.conf.set("fs.azure.account.oauth.provider.type.educacaobasica.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
-spark.conf.set("fs.azure.account.oauth2.client.id.educacaobasica.dfs.core.windows.net", "7df451b3-7610-4661-9b17-17a7fb4b1f4a")
-spark.conf.set("fs.azure.account.oauth2.client.secret.educacaobasica.dfs.core.windows.net", service_credential)
-spark.conf.set("fs.azure.account.oauth2.client.endpoint.educacaobasica.dfs.core.windows.net", "https://login.microsoftonline.com/e2ff5546-5422-47f2-9c8d-9da79aee289e/oauth2/token")
+spark.conf.set("fs.azure.account.auth.type.<storage-account>.dfs.core.windows.net", "OAuth")
+spark.conf.set("fs.azure.account.oauth.provider.type.<storage-account>.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account>.dfs.core.windows.net", "<application-id>")
+spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account>.dfs.core.windows.net", service_credential)
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account>.dfs.core.windows.net", "https://login.microsoftonline.com/<directory-id>/oauth2/token")
 ```
+Em que:
 
-
+- scope = secret scope, criado no próprio Databricks
+- service-credential-key = credential key do Key Vault
+- storage-account = Storage Account
+- application-id = application ID do App Registration
+- directory-id = directory ID do App Registration
 
 
 
