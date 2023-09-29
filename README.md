@@ -212,15 +212,20 @@ OPTIONS (
 )
 ```
 
+#### 3.8 ETL - Extract, Transform e Load (Silver - Gold)
+Agora, será realizado a segunda e última ETL que será referente a camada Silver para a Gold. Aqui, foi-se feito o join das duas tabelas através da coluna de Código da Escola (1:1), realizado a soma total de equipamentos por escola (visto que para a análise, apenas é interessante saber a quantidade total e nao separada por tipo de equipamento) e remoção de mais algumas colunas nao utilizadas:
+
+![ETL - Silver para Gold](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_silver_to_gold.PNG)
+
+Descrição das transformações:
+- Coleta dos dados do Data Lake
+- `JOIN`  para juntar ambas as tabelas
+- `SELECT` para remoção de algumas colunas
+- `DERIVED COLUMN` para remoção de caracteres especiais remanescentes
+- `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Gold
 
 
 
 
-#### 3.7 Segunda Análise
-A próxima etapa é realizar a análise dos dados resultantes da ETL da camada Bronze para Silver. Aqui, foi notado que ambas as tabelas possuem uma chave
 
-
-
-
-Nesta etapa, também é comum realizar análise dos dados e verificar se as transformações foram eficientes e coletar avaliações dos dados da camada Silver. Estas avaliações serão utilizadas posteriormente para a criação da camada Gold.
 
