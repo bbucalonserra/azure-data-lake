@@ -277,7 +277,7 @@ OPTIONS (
 ### 4. Análise
 
 
-1. Qual é a taxa de abandono escolar nas escolas indígenas em relação ao total de matrículas?  Este valor é mais mais ou menos elevado que escolas comuns?
+**1. Qual é a taxa de abandono escolar nas escolas indígenas em relação ao total de matrículas?  Este valor é mais mais ou menos elevado que escolas comuns?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -290,4 +290,23 @@ Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquan
 </details>
 </details>
 
+**2. Onde estão localizadas as escolas em terras indigenas?**
+
+<details>
+  <summary>Mostrar Resposta</summary>
+  
+<img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/loc_escolas_indigenas.PNG" align="left"
+     alt="loc_escola_indigena">
+
+Resposta: As escolas em terras indígenas estão localizadas em diversos estados do Brasil. Com base na contagem de escolas por estado, podemos identificar os estados com o maior número de escolas em terras indígenas:
+- Amazonas: 2,190 escolas
+- Roraima: 674 escolas
+- Maranhão: 642 escolas
+- Pará: 618 escolas
+- Acre: 456 escolas
+
+Portanto, as escolas em terras indígenas estão principalmente concentradas nos estados da região Norte, com Amazonas e Roraima liderando em termos de quantidade de escolas. Essa distribuição reflete a presença de comunidades indígenas nessas regiões e a necessidade de educação nas áreas de suas terras.
+
+</details>
+</details>
 
