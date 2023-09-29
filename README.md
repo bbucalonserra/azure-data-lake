@@ -277,7 +277,7 @@ OPTIONS (
 ### 4. Análise
 
 
-**1. Qual é a taxa de abandono escolar nas escolas indígenas em relação ao total de matrículas?  Este valor é mais mais ou menos elevado que escolas comuns?**
+**1. Qual é a taxa de abandono escolar nas escolas indígenas? Este valor é mais mais ou menos elevado que escolas comuns?**
 
 <details>
   <summary>Mostrar Resposta</summary>
