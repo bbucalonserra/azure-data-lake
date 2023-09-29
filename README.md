@@ -71,7 +71,7 @@ Feito isto, tem-se uma conexão entre o Databricks e o Data Lake. Agora já é p
 
 
 #### 3.4 Criação de Schema
-Dentro do Databricks, por viés organizacional, será necessário criar schemas para armazenas as tabelas de análises. Será criado um Schema por camada do Data Lake. Para isto, basta abrir um notebook e utilizar os seguintes comandos em SQL:
+Dentro do Databricks, por viés organizacional, será necessário criar schemas para armazenas as tabelas de análises. Será criado um schema por camada do Data Lake. Para isto, basta abrir um notebook e utilizar os seguintes comandos em SQL:
 
 ```py
 CREATE SCHEMA bronze;
@@ -81,7 +81,7 @@ CREATE SCHEMA silver;
 CREATE SCHEMA gold;
 ```
 
-### 3.5 Análise Inicial
+### 3.5 Criação das Tabelas da Camada Bronze
 No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
 
 **Tabela microdados_ed_basica_2022**
@@ -104,7 +104,7 @@ spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaob
 ```
 
 Com isto, foi-se visto algumas inconsistências nos dados, como caracteres especiais e colunas indesejadas.
-Foi feito o armazenamento destes dados no Schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
+Foi feito o armazenamento destes dados no schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
 
 **Tabela microdados_ed_basica_2022**
 ```py
@@ -141,7 +141,7 @@ Descrição das transformações:
 
 
 
-#### 3.7 Segunda Análise
+#### 3.7 Criação das Tabelas da Camada Silver
 A próxima etapa é análisar os dados resultantes da ETL da camada Bronze para Silver. Para isto, será necessário criar as novas tabelas após a ETL no Databricks já com a **tipologia dos dados definida e as variáveis de null ou not null também**:
 
 **Tabela Educacao_basica_2022**
@@ -224,7 +224,7 @@ Descrição das transformações:
 - `DERIVED COLUMN` para remoção de caracteres especiais remanescentes
 - `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Gold
 
-#### 3.9 Análise Final
+#### 3.9 Criação das Tabelas da Camada Gold
 Por fim, agora é possível realizar a análise final de uma forma muito mais prática, rápida e consistente, visto que apenas possuimos colunas utilizáveis e de acordo com as regras de negócio das análises. 
 
 ``` py
@@ -271,6 +271,8 @@ OPTIONS (
 )
 ```
 
+
+### 4. Análise
 
 
 
