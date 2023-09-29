@@ -285,6 +285,17 @@ OPTIONS (
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/loc_escolas_indigenas.PNG" align="left"
      alt="loc_escola_indigena">
 
+Query:
+``` py
+SELECT
+Nome_UF,
+COUNT(Codigo_da_Escola) AS Contagem_Escolas
+FROM gold.educacao_rend_escolas_joined
+WHERE Localizacao_Diferenciada = 2
+GROUP BY Nome_UF
+ORDER BY Contagem_Escolas DESC
+```
+
 Resposta: As escolas em terras indígenas estão localizadas em diversos estados do Brasil. Com base na contagem de escolas por estado, podemos identificar os estados com o maior número de escolas em terras indígenas:
 - Amazonas: 2,190 escolas
 - Roraima: 674 escolas
@@ -306,6 +317,36 @@ Portanto, as escolas em terras indígenas estão principalmente concentradas nos
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
      alt="taxa_de_abandono">
 
+Query:
+``` py
+WITH ED_INDIGENA AS (
+  SELECT
+    AVG(Taxa_de_Abandono_Educacao_Basica) AS MEDIA_ED_BASICA_INDIGENA
+  FROM gold.educacao_rend_escolas_joined
+  WHERE
+    Localizacao_Diferenciada = 2
+    AND Taxa_de_Abandono_Educacao_Basica <> 0
+    AND Taxa_de_Abandono_Educacao_Basica IS NOT NULL 
+),
+
+ED_GERAL AS (
+  SELECT
+    AVG(Taxa_de_Abandono_Educacao_Basica) AS MEDIA_ED_BASICA_GERAL
+  FROM gold.educacao_rend_escolas_joined
+  WHERE
+    Taxa_de_Abandono_Educacao_Basica <> 0
+    AND Taxa_de_Abandono_Educacao_Basica IS NOT NULL  
+)
+
+SELECT
+  ROUND(ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA, 2) AS MEDIA_ED_BASICA_INDIGENA,
+  ROUND(ED_GERAL.MEDIA_ED_BASICA_GERAL, 2) AS MEDIA_ED_BASICA_GERAL,
+  ROUND((ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA - ED_GERAL.MEDIA_ED_BASICA_GERAL), 2) AS DIFERENCA_PERCENTUAL,
+  ROUND((ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA - ED_GERAL.MEDIA_ED_BASICA_GERAL) / ED_GERAL.MEDIA_ED_BASICA_GERAL * 100, 2) AS DIFERENCA_EM_PORCENTAGEM
+FROM ED_INDIGENA, ED_GERAL;
+```
+
+
 Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquanto nas escolas comuns é de 7.32%. Portanto, podemos concluir que a taxa de abandono escolar nas escolas indígenas é consideravelmente mais elevada do que nas escolas comuns, com 11.27% maior que escolas comuns. Isso sugere que as escolas indígenas podem enfrentar desafios adicionais ou diferentes que contribuem para uma taxa de abandono mais alta em comparação com as escolas não indígenas. É importante investigar e abordar esses desafios para melhorar o acesso e a qualidade da educação para as comunidades indígenas.
 
 </details>
@@ -321,18 +362,72 @@ Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquan
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/media_equip_escolas_por_estado.PNG" align="left"
      alt="media_equipamentos_estado">
 
+Query:
+``` py
+SELECT
+  Nome_UF,
+  ROUND(AVG(Total_Equipamentos),2) AS Media_Equip
+FROM gold.educacao_rend_escolas_joined
+WHERE
+  Taxa_de_Abandono_Educacao_Basica IS NOT NULL
+  AND Taxa_de_Abandono_Educacao_Basica <> 0
+  AND Localizacao_Diferenciada = 2
+GROUP BY ALL
+ORDER BY Media_Equip DESC
+```
 
 Resposta: O gráfico a cima mostra a média de equipamentos tecnológicos disponíveis em escolas com educação indígena em cada estado. Santa Catarina tem a maior média, com 9 equipamentos, enquanto Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá e Maranhão têm médias muito baixas, próximas a zero. Esses números indicam a disparidade na disponibilidade de equipamentos tecnológicos em escolas indígenas em diferentes estados do Brasil.
 
 
-**4. Qual a porcentagem de escolas em locais indigenas que possue internet por estado?**
+**4. Qual a porcentagem de escolas em locais indigenas que possuem internet por estado?**
 
 <details>
   <summary>Mostrar Resposta</summary>
 
+
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/porcentagem_escolas_indigenas_com_internet.PNG" align="left"
      alt="internet_por_estado">
 
+Query:
+``` py
+SELECT
+  NOME_UF,
+  ROUND((SUM(CASE WHEN Internet = 1 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) AS PORCENTAGEM_COM_INTERNET
+FROM gold.educacao_rend_escolas_joined
+WHERE 
+  Localizacao_Diferenciada = 2
+GROUP BY NOME_UF
+ORDER BY PORCENTAGEM_COM_INTERNET DESC
+```
 
 Resposta: Os números a cima números representam a porcentagem de escolas indígenas em cada estado que têm acesso à internet. Enquanto alguns estados, como Paraná e Goiás, têm 100% de suas escolas indígenas com acesso à internet, outros, como Piauí e Acre, têm uma porcentagem muito baixa ou mesmo nula de escolas com acesso à internet. Isso reflete a variação na infraestrutura de tecnologia da informação em diferentes regiões do país e destaca a necessidade de melhorar o acesso à internet em escolas indígenas em todo o Brasil.
 
+
+**5. Em qual língua é ministrada as disciplinas nas escolas indígenas? Estamos mantendo as raízes das tribos em relação à língua materna?**
+
+<details>
+  <summary>Mostrar Resposta</summary>
+
+
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/linguas_indigenas.PNG" align="left"
+     alt="lingua_indigena">
+
+Query:
+``` py
+SELECT
+  Lingua_Indigena,
+  ROUND(COUNT(Codigo_da_Escola) * 100.0 / SUM(COUNT(Codigo_da_Escola)) OVER (), 2) AS PORCENTAGEM_DE_ESCOLAS
+FROM gold.educacao_rend_escolas_joined
+WHERE
+  Localizacao_Diferenciada = 2
+GROUP BY Lingua_Indigena
+ORDER BY Lingua_indigena
+```
+
+  Resposta: Nas escolas indígenas, as disciplinas são ministradas em diferentes línguas, e algumas escolas adotam uma abordagem bilíngue. Aqui está a distribuição com base nos dados:
+  - Somente língua indígena: 3.30% das escolas indígenas adotam exclusivamente a língua indígena como meio de instrução.
+  - Português: 22.70% das escolas indígenas ministram as disciplinas apenas em português.
+  - Língua indígena e português: A maioria das escolas indígenas, 71.97%, adota uma abordagem bilíngue, ministrando as disciplinas tanto na língua indígena quanto em português.
+  - Não aplicável sem educação indígena: 2.02% dos dados não são aplicáveis, indicando que essas escolas não oferecem educação indígena ou não forneceram informações sobre a língua de instrução.
+
+  Portanto, a maioria das escolas indígenas no Brasil adota uma abordagem bilíngue, ministrando as disciplinas tanto na língua indígena quanto em português, o que reflete a importância de preservar as raízes das tribos   em relação à língua materna, ao mesmo tempo em que oferece acesso à educação em português.
