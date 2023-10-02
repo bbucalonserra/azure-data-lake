@@ -3,7 +3,16 @@
 ## Objetivo
 A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
 
-O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação indígena no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias.
+O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação indígena no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias. Ao longo dessa investigação, buscamos responder às seguintes perguntas cruciais:
+
+- Onde estão localizadas as escolas em terras indígenas?
+- Qual é a taxa de abandono escolar nas escolas indígenas e como ela se compara com as escolas não indígenas?
+- Qual é a média de equipamentos tecnológicos por estado em escolas com educação indígena?
+- Qual a porcentagem de escolas em áreas indígenas que possuem acesso à internet, segmentada por estado?
+- Em qual língua são ministradas as disciplinas nas escolas indígenas, e como isso se relaciona com a preservação das línguas maternas das tribos?
+- A presença de computadores nas escolas indígenas tem alguma influência na taxa de abandono escolar?
+
+Essas questões são fundamentais para entender a realidade da educação indígena no Brasil e para direcionar esforços e políticas que visam melhorar essa importante área da educação.
 
 ## O Projeto
 ### 1. Busca Pelos Dados
@@ -44,9 +53,6 @@ Para criar uma conexão entre o Data Lake e o Databricks, será necessário cria
 
 Com os recursos criados, basta entrar no Databricks, criar um notebook e utilizar o seguinte código em `Spark`:
 
-<details>
-  <summary>Mostrar Código</summary>
-  
 ```py
 service_credential = dbutils.secrets.get(scope="<scope>",key="<service-credential-key>")
 
@@ -64,9 +70,6 @@ Em que:
 - application-id = application ID do App Registration
 - directory-id = directory ID do App Registration
 
-</details>
-</details>
-
 Feito isto, tem-se uma conexão entre o Databricks e o Data Lake. Agora já é possível criar tabelas e popula-las com os dados do Lake.
 
 
@@ -81,7 +84,7 @@ CREATE SCHEMA silver;
 CREATE SCHEMA gold;
 ```
 
-### 3.5 Criação das Tabelas da Camada Bronze
+#### 3.5 Criação das Tabelas da Camada Bronze
 No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
 
 **Tabela microdados_ed_basica_2022**
@@ -306,18 +309,28 @@ Um catálogo de dados é uma ferramenta que organiza e descreve informações so
 | 26 | Lingua_Indigena_2 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 2 | INTEGER | 100 | 999 |
 | 27 | Lingua_Indigena_3 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 3 | INTEGER | 126 | 999 |
 | 28 | Material_Indigena | Instrumentos e materiais socioculturais e/ou pedagógicos em uso na escola para o desenvolvimento de atividades de ensino e aprendizagem - Indígena | INTEGER | 0 | 1 |
-| 29 | Taxa_de_Aprovacao_Educacao_Basica
-
+| 29 | Taxa_de_Aprovacao_Educacao_Basica        | Taxa de aprovação na educação básica            | FLOAT  | null   | null   |
+| 30 | Taxa_de_Reprovacao_Educacao_Basica       | Taxa de reprovação na educação básica           | FLOAT  | null   | null   |
+| 31 | Taxa_de_Abandono_Educacao_Basica         | Taxa de abandono na educação básica             | FLOAT  | 0.0    | 9.0    |
 
 
 ### 4. Análise
 A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
 
 
-#### 4. Qualidade dos Dados
-De acordo com as análises realizadas na camada Gold, ainda existem alguns problemas com a qualidade de dados para algumas colunas. A coluna **Nome_do_Municipio** ainda está obtendo o valor "�" para letras com acento ou para a letra "ç" ("ainda" pois este problema foi tratado na ETL da camada Bronze para Silver). Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
+#### 4.1 Qualidade dos Dados
+Antes de se aprofundar na análise em si, é crucial que realizar uma avaliação da qualidade dos dados contidos na camada gold (camada final) para compreender de forma mais abrangente como esses dados podem influenciar as análises finais que serão conduzidas. Nesse contexto, será dedicado nossa atenção à identificação de possíveis inconsistências ou falhas nos dados, visando assegurar que as análises subsequentes sejam fundamentadas em informações confiáveis.
+Ainda existem alguns problemas com a qualidade de dados para algumas colunas.
+A coluna **Nome_do_Municipio** ainda está obtendo o valor "�" para letras com acento ou para a letra "ç" ("ainda" pois este problema foi tratado na ETL da camada Bronze para Silver). Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
 A coluna **Taxa_de_Aprovacao_Educacao_Basica**, por algum motivo ao longo das ETLS, está com valores apenas nulos. Isto faz com que análises referentes a aprovação de alunos em escolas indígenas, um comparativo entre aprovações com alunos em escolas em locais indígenas e escolas comuns fique impossível de ser realizada. 
 A coluna **Salas_Existentes** está com valores nulos também, possívelmente por alguma etapa da ETL. Isto faz com que análises sobre a quantidade de alunos por sala em escolas em locais indígenas, ou verificações se a infraestrutura das escolas em locais indígenas atende a necessidade da população.
+A coluna **Computadores** e **Computadores Administrativos** também estão com valores nulos, possívelmente por alguma etapa da ETL. Isto faz com que seja impossível responder as pergunta referentes a computadores nas escolas ("A presença de computadores nas escolas indígenas tem alguma influência na taxa de abandono escolar?") e talvez seja enviesado os resultados referentes a equipamentos tecnológicos. 
+Para o restante dos dados, nao foi-se encontrado problemas. No entanto, seria interessante remover algumas colunas para melhorar o processamento dos dados nas queries visto que nem todas as colunas foram utilizadas.
+
+
+#### 4.2 Resposta as Perguntas
+Neste segmento, será apresentada uma análise e as respostas para as perguntas levantadas em relação à educação indígena no Brasil. Através de representações gráficas e análises, serão oferecidos insights sobre as diferentes sobre a educação em terras indígenas.
+Ao longo deste tópico, será encontrado gráficos e análises que abordarão as perguntas-chave, incluindo a localização das escolas em terras indígenas, as taxas de abandono escolar, a disponibilidade de equipamentos tecnológicos, o acesso à internet e o idioma de instrução.
 
 
 **1. Onde estão localizadas as escolas em terras indigenas?**
