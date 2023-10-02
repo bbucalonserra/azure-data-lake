@@ -1,5 +1,26 @@
 # Educação Básica nas Escolas em territórios indígenas
 
+1. [Objetivo](#objetivo)
+2. [O Projeto](#o-projeto)
+   - [1. Busca Pelos Dados](#1-busca-pelos-dados)
+   - [2. Coleta](#2-coleta)
+     - [2.1 Definição do Sistema de Cloud Computing](#21-definição-do-sistema-de-cloud-computing)
+     - [2.2 Recursos de Armazenamento](#22-recursos-de-armazenamento)
+   - [3. Modelagem e Carga](#3-modelagem-e-carga)
+     - [3.1 Conexão Data Lake e Databricks](#31-conexão-data-lake-e-databricks)
+     - [3.2 Criação de Schema](#32-criação-de-schema)
+     - [3.3 Criação das Tabelas da Camada Bronze](#33-criação-das-tabelas-da-camada-bronze)
+     - [3.4 ETL - Extract, Transform e Load (Bronze - Silver)](#34-etl---extract-transform-e-load-bronze---silver)
+     - [3.5 Criação das Tabelas da Camada Silver](#35-criação-das-tabelas-da-camada-silver)
+     - [3.6 ETL - Extract, Transform e Load (Silver - Gold)](#36-etl---extract-transform-e-load-silver---gold)
+     - [3.7 Criação das Tabelas da Camada Gold](#37-criação-das-tabelas-da-camada-gold)
+     - [3.8 Catálogo de Dados](#38-catálogo-de-dados)
+   - [4. Análise](#4-análise)
+     - [4.1 Qualidade dos Dados](#41-qualidade-dos-dados)
+     - [4.2 Solução dos Problemas](#42-solução-dos-problemas)
+
+
+
 ## Objetivo
 A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
 
