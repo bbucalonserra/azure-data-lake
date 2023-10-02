@@ -309,9 +309,9 @@ Um catálogo de dados é uma ferramenta que organiza e descreve informações so
 | 26 | Lingua_Indigena_2 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 2 | INTEGER | 100 | 999 |
 | 27 | Lingua_Indigena_3 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 3 | INTEGER | 126 | 999 |
 | 28 | Material_Indigena | Instrumentos e materiais socioculturais e/ou pedagógicos em uso na escola para o desenvolvimento de atividades de ensino e aprendizagem - Indígena | INTEGER | 0 | 1 |
-| 29     | Taxa_de_Aprovacao_Educacao_Basica        | Taxa de aprovação na educação básica            | FLOAT  | null   | null   |
-| 30     | Taxa_de_Reprovacao_Educacao_Basica       | Taxa de reprovação na educação básica           | FLOAT  | null   | null   |
-| 31     | Taxa_de_Abandono_Educacao_Basica         | Taxa de abandono na educação básica             | FLOAT  | 0.0    | 9.0    |
+| 29 | Taxa_de_Aprovacao_Educacao_Basica        | Taxa de aprovação na educação básica            | FLOAT  | null   | null   |
+| 30 | Taxa_de_Reprovacao_Educacao_Basica       | Taxa de reprovação na educação básica           | FLOAT  | null   | null   |
+| 31 | Taxa_de_Abandono_Educacao_Basica         | Taxa de abandono na educação básica             | FLOAT  | 0.0    | 9.0    |
 
 
 ### 4. Análise
