@@ -49,7 +49,7 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
 #### 3.3 Conexão Data Lake e Databricks
 Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. Para isto, será usado o recurso Azure Databricks. 
 Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
-- `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/app_reg_icon.jpeg" alt="drawing" width="40"/> plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada
+- `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/dbx_icon.png" alt="drawing" width="40"/> plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada
 - `Registration App` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/app_reg_icon.jpeg" alt="drawing" width="40"/> a entidade que representa uma aplicação ou serviço que deseja acessar os recursos na plataforma Azure. É identificação para um aplicativo ou serviço que quer fazer alterações na nuvem da Microsoft
 - `Key Vault` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/key%20vault%20icon.png" alt="drawing" width="40"/> serviço de gerenciamento de chaves e segredos
 
