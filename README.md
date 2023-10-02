@@ -84,7 +84,7 @@ CREATE SCHEMA silver;
 CREATE SCHEMA gold;
 ```
 
-### 3.5 Criação das Tabelas da Camada Bronze
+#### 3.5 Criação das Tabelas da Camada Bronze
 No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
 
 **Tabela microdados_ed_basica_2022**
