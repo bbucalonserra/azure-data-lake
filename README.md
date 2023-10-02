@@ -41,9 +41,16 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
 - Silver: dados limpos e transformados, removendo colunas indesejadas, caracteres estranhos e removendo espaços
 - Gold: dados organizados, com join realizado entre tabelas caso necessário e com regras de negócios aplicados de acordo com as métricas / perguntas definidas que deverão ser respondidas
 
-![Layers - Containers](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG "Containers de Armazenamento / Layers do Data Lake")
+<div align="center">
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG" alt="Containers de Armazenamento / Layers do Data Lake" />
+  <p><em>Containers de Armazenamento / Layers do Data Lake</em></p>
+</div>
 
-![Bronze](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG "Arquivos Armazenados na Camada Bronze")
+<div align="center">
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG" alt="Arquivos Armazenados na Camada Bronze" />
+  <p><em>Arquivos Armazenados na Camada Bronze</em></p>
+</div>
+
 
 ### 3. Modelagem e Carga
 A modelagem de dados é um processo fundamental no campo da ciência da computação e da gestão de informações. A principal finalidade da modelagem de dados é garantir que os dados sejam organizados, armazenados e gerenciados de forma eficiente e precisa para atender às necessidades específicas de uma organização ou projeto. **Aqui, Modelagem e Carga estão no mesmo tópico porque será utilizado diretamente um sistema de Data Lake, armazenando os dados por camadas.**
