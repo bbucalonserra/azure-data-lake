@@ -34,8 +34,8 @@ A escolha da `Azure` <img align="center" src="https://github.com/bbucalonserra/d
 
 #### 3.2 Recursos de Armazenamento
 Inicialmente, foi-se criado uma conta na Azure de forma gratuita com uma quantia a ser utilizada por fins acadêmicos. Aqui, foi-se criado, em ordem:
-- Um `Resource Group` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/resource_group_icon.png" alt="drawing" width="40"/> (contêiner lógico que ajuda a gerenciar e organizar recursos relacionados no Azure)
-- `Storage Account` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/storage_account_icon.png" alt="drawing" width="40"/> (um recurso da Azure que fornece armazenamento em nuvem de arquivos), sendo utilizado o `Azure Data Lake Storage 2gen`
+- Um `Resource Group` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/resource_group_icon.png" alt="drawing" width="40"/> contêiner lógico que ajuda a gerenciar e organizar recursos relacionados no Azure
+- `Storage Account` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/storage_account_icon.png" alt="drawing" width="40"/> um recurso da Azure que fornece armazenamento em nuvem de arquivos, sendo utilizado o `Azure Data Lake Storage 2gen` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/adls_icon.png" alt="drawing" width="40"/>
 - Container Bronze, Silver e Gold 
 
 Com isto, foi-se inserido os dados coletados do site governo no container Bronze. Posteriormente, após a realização de ETL, os dados ficarão armazenados na camada Silver e, por fim, na camada Gold. A definição de cada camada utilizada foi:
@@ -43,11 +43,13 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
 - Silver: dados limpos e transformados, removendo colunas indesejadas, caracteres estranhos e removendo espaços
 - Gold: dados organizados, com join realizado entre tabelas caso necessário e com regras de negócios aplicados de acordo com as métricas / perguntas definidas que deverão ser respondidas
 
+![Layers - Containers](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG)
+
 
 #### 3.3 Conexão Data Lake e Databricks
 Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. Para isto, será usado o recurso Azure Databricks. 
 Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
-- Databricks (plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada)
+- `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/dbx_icon.png" alt="drawing" width="40"/> (plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada)
 - Registration App (entidade que representa uma aplicação ou serviço que deseja acessar os recursos na plataforma Azure. É identificação para um aplicativo ou serviço que quer fazer alterações na nuvem da Microsoft)
 - Key Vault (serviço de gerenciamento de chaves e segredos)
 
