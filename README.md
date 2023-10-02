@@ -341,7 +341,7 @@ A coluna **Computadores** e **Computadores Administrativos** também estão com 
 Para o restante dos dados, nao foi-se encontrado problemas. No entanto, seria interessante remover algumas colunas para melhorar o processamento dos dados nas queries visto que nem todas as colunas foram utilizadas.
 
 
-#### 4.2 Resposta as Perguntas
+#### 4.2 Solução dos Problemas
 Neste segmento, será apresentada uma análise e as respostas para as perguntas levantadas em relação à educação indígena no Brasil. Através de representações gráficas e análises, serão oferecidos insights sobre as diferentes sobre a educação em terras indígenas.
 Ao longo deste tópico, será encontrado gráficos e análises que abordarão as perguntas-chave, incluindo a localização das escolas em terras indígenas, as taxas de abandono escolar, a disponibilidade de equipamentos tecnológicos, o acesso à internet e o idioma de instrução.
 
