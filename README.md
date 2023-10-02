@@ -1,4 +1,5 @@
 # Educação Básica nas Escolas em territórios indígenas
+A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
 
 # Índice
 1. [Objetivo](#objetivo)
@@ -23,8 +24,6 @@
 
 
 ## Objetivo
-A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
-
 O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação nas escolas indígenas no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias. Ao longo dessa investigação, será buscado responder às seguintes perguntas cruciais:
 
 - Onde estão localizadas as escolas em terras indígenas?
