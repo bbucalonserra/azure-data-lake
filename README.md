@@ -1,5 +1,6 @@
 # Educação Básica nas Escolas em territórios indígenas
 
+# Índice
 1. [Objetivo](#objetivo)
 2. [O Projeto](#o-projeto)
    - [1. Busca Pelos Dados](#1-busca-pelos-dados)
