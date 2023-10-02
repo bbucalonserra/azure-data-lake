@@ -17,8 +17,9 @@ Essas questões são fundamentais para entender a realidade da educação indíg
 ## O Projeto
 ### 1. Busca Pelos Dados
 A busca pelos dados foi realizada por meio do site do governo (https://www.gov.br/inep/pt-br/acesso-a-informacao), em que foi-se buscado tabelas referentes ao censo escolar do Brasil em 2022. Foram encontradas duas tabelas para fazer parte da análise: 
-- [Microdados do Censo Escolar da Educacao no Brasil 2022](https://github.com/bbucalonserra/data_engineering/blob/main/tables_bronze/microdados_ed_basica_2022.xlsx)
-- [Taxa Rendimento Escolas 2022](https://github.com/bbucalonserra/data_engineering/blob/main/tables_bronze/tx_rend_escolas_2022.xlsx)
+- [Microdados do Censo Escolar da Educacao no Brasil 2022](https://docs.google.com/spreadsheets/d/1er1GJqNIxP_sw-0k_DF3SqBpDyo0XOLU/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
+- [Taxa Rendimento Escolas 2022](https://docs.google.com/spreadsheets/d/1g02tYUN2sTgARp9_JTlF7RUMj3RhHHaZ/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
+
 
 A primeira tabela é referente a diversas informações sobre as escolas no Brasil (código da escola, têm ou nao internet, salas, etc.), possui 385 colunas. Já a segunda é em relação a taxa de rendimento escolar (notas, taxa de abandono, taxa de reprovação, etc.), possui 12 colunas.
 
