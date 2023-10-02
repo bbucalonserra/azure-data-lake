@@ -3,7 +3,7 @@
 ## Objetivo
 A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
 
-O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação indígena no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias. Ao longo dessa investigação, buscamos responder às seguintes perguntas cruciais:
+O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação nas escolas indígenas no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias. Ao longo dessa investigação, será buscado responder às seguintes perguntas cruciais:
 
 - Onde estão localizadas as escolas em terras indígenas?
 - Qual é a taxa de abandono escolar nas escolas indígenas e como ela se compara com as escolas não indígenas?
@@ -25,15 +25,12 @@ A primeira tabela é referente a diversas informações sobre as escolas no Bras
 
 
 ### 2. Coleta
-A coleta de dados foi realizada por meio do download de duas tabelas diretamente do site oficial do governo. Essa etapa foi crucial para garantir que os dados utilizados sejam precisos e confiáveis, uma vez que as fontes governamentais são reconhecidas como uma fonte primária de informações educacionais. A decisão de obter os dados diretamente do site do governo foi tomada para garantir que as informações coletadas estejam alinhadas com as fontes oficiais disponíveis
+A coleta de dados foi realizada por meio do download de duas tabelas diretamente do site oficial do governo. Essa etapa foi crucial para garantir que os dados utilizados sejam precisos e confiáveis, uma vez que as fontes governamentais são reconhecidas como uma fonte primária de informações educacionais. A decisão de obter os dados diretamente do site do governo foi tomada para garantir que as informações coletadas estejam alinhadas com as fontes oficiais disponíveis.
 
-### 3. Modelagem e Carga
-A modelagem de dados é um processo fundamental no campo da ciência da computação e da gestão de informações. A principal finalidade da modelagem de dados é garantir que os dados sejam organizados, armazenados e gerenciados de forma eficiente e precisa para atender às necessidades específicas de uma organização ou projeto. **Aqui, Modelagem e Carga estão no mesmo tópico porque será utilizado diretamente um sistema de Data Lake, armazenando os dados por camadas.**
-
-#### 3.1 Definição do Sistema de Cloud Computing
+#### 2.1 Definição do Sistema de Cloud Computing
 A escolha da `Azure` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure_logo.png" alt="drawing" width="40"/> como sitema de cloud computing deste projeto foi baseada em sua reputação global como uma das principais plataformas de nuvem do mundo. Além disso, a Azure é conhecida por sua excelente integração com ferramentas amplamente utilizadas, como o Power BI, o que facilita a análise de dados. A plataforma Azure também se destaca pela sua segurança robusta e capacidade de escalabilidade, garantindo a proteção dos dados e sua flexibilidade.
 
-#### 3.2 Recursos de Armazenamento
+#### 2.2 Recursos de Armazenamento
 Inicialmente, foi-se criado uma conta na Azure de forma gratuita com uma quantia a ser utilizada por fins acadêmicos. Aqui, foi-se criado, em ordem:
 - Um `Resource Group` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/resource_group_icon.png" alt="drawing" width="40"/> contêiner lógico que ajuda a gerenciar e organizar recursos relacionados no Azure
 - `Storage Account` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/storage_account_icon.png" alt="drawing" width="40"/> um recurso da Azure que fornece armazenamento em nuvem de arquivos, sendo utilizado o `Azure Data Lake Storage 2gen` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/adls_icon.png" alt="drawing" width="40"/>
@@ -46,8 +43,10 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
 
 ![Layers - Containers](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG)
 
+### 3. Modelagem e Carga
+A modelagem de dados é um processo fundamental no campo da ciência da computação e da gestão de informações. A principal finalidade da modelagem de dados é garantir que os dados sejam organizados, armazenados e gerenciados de forma eficiente e precisa para atender às necessidades específicas de uma organização ou projeto. **Aqui, Modelagem e Carga estão no mesmo tópico porque será utilizado diretamente um sistema de Data Lake, armazenando os dados por camadas.**
 
-#### 3.3 Conexão Data Lake e Databricks
+#### 3.1 Conexão Data Lake e Databricks
 Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. Para isto, será usado o recurso Azure Databricks. 
 Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
 - `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/dbx_icon.png" alt="drawing" width="40"/> plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada
@@ -76,7 +75,7 @@ Em que:
 Feito isto, tem-se uma conexão entre o Databricks e o Data Lake. Agora já é possível criar tabelas e popula-las com os dados do Lake.
 
 
-#### 3.4 Criação de Schema
+#### 3.2 Criação de Schema
 Dentro do Databricks, por viés organizacional, será necessário criar schemas para armazenas as tabelas de análises. Será criado um schema por camada do Data Lake. Para isto, basta abrir um notebook e utilizar os seguintes comandos em SQL:
 
 ```py
@@ -87,7 +86,7 @@ CREATE SCHEMA silver;
 CREATE SCHEMA gold;
 ```
 
-#### 3.5 Criação das Tabelas da Camada Bronze
+#### 3.3 Criação das Tabelas da Camada Bronze
 No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
 
 **Tabela microdados_ed_basica_2022**
@@ -135,7 +134,7 @@ OPTIONS (
 Observação: a tipologia dos dados ainda não foi definida por serem dados crus (raw). Elas serão definidas na camada Silver.
 
 
-#### 3.6 ETL - Extract, Transform e Load (Bronze - Silver)
+#### 3.4 ETL - Extract, Transform e Load (Bronze - Silver)
 Após a inserção dos dados brutos na camada Bronze, selecionado as colunas, notado algumas inconsistências nos dados e criado as tabelas, a próxima etapa é a realização das transformações. Para tal atividade, foi-se utilizado o recurso `Data Factory` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure-data-factory2539.jpg" alt="drawing" width="40"/>, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas. A linguagem utilizada por este recurso é chamada de "Linguagem de Expressão de Transformação de Dados" (Data Flow Expression Language). Essa linguagem permite que você defina transformações de dados usando uma sintaxe semelhante ao SQL e inclui funções e operadores para executar operações de transformação, filtragem, projeção e muito mais. Abaixo, estão as transformações utilizadas no Data Factory:
 
 ![ETL - Bronze para Silver](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_bronze_to_silver.PNG)
@@ -149,7 +148,7 @@ Descrição das transformações:
 
 
 
-#### 3.7 Criação das Tabelas da Camada Silver
+#### 3.5 Criação das Tabelas da Camada Silver
 A próxima etapa é análisar os dados resultantes da ETL da camada Bronze para Silver. Para isto, será necessário criar as novas tabelas após a ETL no Databricks já com a **tipologia dos dados definida e as variáveis de null ou not null também**:
 
 **Tabela Educacao_basica_2022**
@@ -220,7 +219,7 @@ OPTIONS (
 )
 ```
 
-#### 3.8 ETL - Extract, Transform e Load (Silver - Gold)
+#### 3.6 ETL - Extract, Transform e Load (Silver - Gold)
 Agora, será realizado a segunda e última ETL que será referente a camada Silver para a Gold. Aqui, foi-se feito o join das duas tabelas através da coluna de Código da Escola (1:1), realizado a soma total de equipamentos por escola (visto que para a análise, apenas é interessante saber a quantidade total e nao separada por tipo de equipamento) e remoção de mais algumas colunas nao utilizadas:
 
 ![ETL - Silver para Gold](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_silver_to_gold.PNG)
@@ -232,7 +231,7 @@ Descrição das transformações:
 - `DERIVED COLUMN` para remoção de caracteres especiais remanescentes
 - `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Gold
 
-#### 3.9 Criação das Tabelas da Camada Gold
+#### 3.7 Criação das Tabelas da Camada Gold
 Por fim, agora é possível realizar a análise final de uma forma muito mais prática, rápida e consistente, visto que apenas possuimos colunas utilizáveis e de acordo com as regras de negócio das análises. 
 
 ``` py
@@ -279,7 +278,7 @@ OPTIONS (
 )
 ```
 
-#### 3.10 Catálogo de Dados
+#### 3.8 Catálogo de Dados
 Um catálogo de dados é uma ferramenta que organiza e descreve informações sobre conjuntos de dados disponíveis, fornecendo detalhes como origem, estrutura, significado e relação entre eles. É essencial para a gestão e utilização eficiente dos dados em uma organização. Abaixo está o Catálogo referente a tabela final, na camada Gold:
 
 
