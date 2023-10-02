@@ -46,6 +46,8 @@ Com isto, foi-se inserido os dados coletados do site governo no container Bronze
   <p><em>Containers de Armazenamento / Layers do Data Lake</em></p>
 </div>
 
+
+
 <div align="center">
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG" alt="Arquivos Armazenados na Camada Bronze" />
   <p><em>Arquivos Armazenados na Camada Bronze</em></p>
