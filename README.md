@@ -2,14 +2,14 @@
 Education is a crucial aspect of human and social development, playing a fundamental role in creating more just and egalitarian societies. Brazil, with its diversified cultural composition and numerous ethnic groups, including indigenous communities that contribute significantly to the nation's identity, requires special consideration for indigenous education. It is important to prioritize the preservation of cultural traditions and the empowerment of native communities.
 
 # Index
-1. [Objetivo](#objetivo)
-2. [O Projeto](#o-projeto)
-   - [1. Busca Pelos Dados](#1-busca-pelos-dados)
-   - [2. Coleta](#2-coleta)
-     - [2.1 Definição do Sistema de Cloud Computing](#21-definição-do-sistema-de-cloud-computing)
-     - [2.2 Recursos de Armazenamento](#22-recursos-de-armazenamento)
-   - [3. Modelagem e Carga](#3-modelagem-e-carga)
-     - [3.1 Conexão Data Lake e Databricks](#31-conexão-data-lake-e-databricks)
+1. [Objective](#objective)
+2. [The Project](#the-project)
+   - [1. Data Search](#1-data-search)
+   - [2. Data Collection](#2-data-collection)
+     - [2.1 Definition of Cloud Computing System](#21-definition-of-cloud-computing-system)
+     - [2.2 Storage Resources](#22-storage-resources)
+   - [3. Modeling and Loading](#3-modeling-and-loading)
+     - [3.1 Data Lake and Databricks Connection](#31-data-lake-and-databricks-connection)
      - [3.2 Criação de Schema](#32-criação-de-schema)
      - [3.3 Criação das Tabelas da Camada Bronze](#33-criação-das-tabelas-da-camada-bronze)
      - [3.4 ETL - Extract, Transform e Load (Bronze - Silver)](#34-etl---extract-transform-e-load-bronze---silver)
