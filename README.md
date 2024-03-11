@@ -1,4 +1,4 @@
-# Basic Education in Schools in Indigenous Territories in Brazil
+# Basic Education in Schools in Brazilian Indigenous Territories
 Education is a crucial aspect of human and social development, playing a fundamental role in creating more just and egalitarian societies. Brazil, with its diversified cultural composition and numerous ethnic groups, including indigenous communities that contribute significantly to the nation's identity, requires special consideration for indigenous education. It is important to prioritize the preservation of cultural traditions and the empowerment of native communities.
 
 # Index
