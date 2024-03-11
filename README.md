@@ -14,7 +14,7 @@ Education is a crucial aspect of human and social development, playing a fundame
      - [3.3 Creation of Bronze Layer Tables](#33-creation-of-bronze-layer-tables)
      - [3.4 ETL - Extract, Transform and Load (Bronze - Silver)](#34-etl---extract-transform-and-load-bronze---silver)
      - [3.5 Creation of Silver Layer Tables](#35-creation-of-silver-layer-tables)
-     - [3.6 ETL - Extract, Transform e Load (Silver - Gold)](#3.6-etl---extract-transform-e-load-silver---gold)
+     - [3.6 ETL - Extract, Transform and Load (Silver - Gold)](#3.6-etl---extract-transform-and-load-silver---gold)
      - [3.7 Creation of Gold Layer Tables](#37-creation-of-gold-layer-tables)
      - [3.8 Data Catalog](#38-data-catalog)
    - [4. Analysis](#4-analysis)
@@ -165,7 +165,7 @@ OPTIONS (
 Note: data types have not been defined yet because they are raw data. They will be defined in the Silver layer.
 
 
-#### 3.4 ETL - Extract, Transform e Load (Bronze - Silver)
+#### 3.4 ETL - Extract, Transform and Load (Bronze - Silver)
 After inserting the raw data into the Bronze layer, selecting the columns, noticing some data inconsistencies, and creating the tables, the next step is to perform the transformations. For this task, the `Data Factory` resource <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure-data-factory2539.jpg" alt="drawing" width="40"/>, was used, as it is a visual and easy-to-use tool, and the required transformations are not advanced. The language used by this resource is called "Data Flow Expression Language." This language allows you to define data transformations using a syntax similar to SQL and includes functions and operators to perform transformation, filtering, projection, and much more. Below are the transformations used in Data Factory:
 
 ![ETL - Bronze para Silver](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_bronze_to_silver.PNG)
