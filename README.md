@@ -14,7 +14,7 @@ Education is a crucial aspect of human and social development, playing a fundame
      - [3.3 Creation of Bronze Layer Tables](#33-creation-of-bronze-layer-tables)
      - [3.4 ETL - Extract, Transform and Load (Bronze - Silver)](#34-etl---extract-transform-and-load-bronze---silver)
      - [3.5 Creation of Silver Layer Tables](#35-creation-of-silver-layer-tables)
-     - [3.6 ETL - Extract, Transform and Load (Silver - Gold)](#3.6-etl---extract-transform-and-load-silver---gold)
+     - [3.6 ETL - Extract, Transform and Load (Silver - Gold)](#36-etl---extract-transform-and-load-silver---gold)
      - [3.7 Creation of Gold Layer Tables](#37-creation-of-gold-layer-tables)
      - [3.8 Data Catalog](#38-data-catalog)
    - [4. Analysis](#4-analysis)
