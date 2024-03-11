@@ -249,7 +249,7 @@ OPTIONS (
 )
 ```
 
-#### 3.6 ETL - Extract, Transform e Load (Silver - Gold)
+#### 3.6 ETL - Extract, Transform and Load (Silver - Gold)
 Now, the second and final ETL will be performed, which will be related to the Silver layer to Gold. Here, the join of the two tables was made through the School Code column (1:1), the total sum of equipment per school was calculated (since for the analysis, it is only interesting to know the total quantity and not separated by type of equipment), and some more unused columns were removed:
 
 ![ETL - Silver para Gold](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_silver_to_gold.PNG)
