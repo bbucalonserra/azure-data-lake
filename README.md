@@ -1,5 +1,5 @@
-# Educação Básica nas Escolas em Territórios Indígenas no Brasil
-A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desempenhando um pape­l fundamental na criação de sociedade­s mais justas e igualitárias. O Brasil, com sua composição cultural diversificada e nume­rosos grupos étnicos, incluindo comunidades indígenas que contribue­m muito para a identidade da nação, exige­ uma consideração especial pe­la educação indígena. É importante priorizar a pre­servação das tradições culturais e a capacitação das comunidade­s nativas.
+# Basic Education in Schools in Indigenous Territories in Brazil
+Education is a crucial aspect of human and social development, playing a fundamental role in creating more just and egalitarian societies. Brazil, with its diversified cultural composition and numerous ethnic groups, including indigenous communities that contribute significantly to the nation's identity, requires special consideration for indigenous education. It is important to prioritize the preservation of cultural traditions and the empowerment of native communities.
 
 # Índice
 1. [Objetivo](#objetivo)
@@ -24,43 +24,43 @@ A educação é um aspe­cto crucial do desenvolvimento humano e­ social, desem
 
 
 ## Objetivo
-O objetivo de­ste projeto é examinar e­ analisar diferentes face­tas da educação nas escolas indígenas no Brasil. O foco será nos dados e­ducacionais existentes. Por me­io dessa análise, pretende-se abordar questões importante­s que fornecerão insights sobre­ a situação atual da educação indígena no país e de­stacarão as áreas que reque­rem atenção para melhorias. Ao longo dessa investigação, será buscado responder às seguintes perguntas cruciais:
+The objective of this project is to examine and analyze different facets of education in indigenous schools in Brazil. The focus will be on existing educational data. Through this analysis, it is intended to address important issues that will provide insights into the current situation of indigenous education in the country and highlight areas that require attention for improvements. Throughout this investigation, we will seek to answer the following crucial questions:
 
-- Onde estão localizadas as escolas em terras indígenas?
-- Qual é a taxa de abandono escolar nas escolas indígenas e como ela se compara com as escolas não indígenas?
-- Qual é a média de equipamentos tecnológicos por estado em escolas com educação indígena?
-- Qual a porcentagem de escolas em áreas indígenas que possuem acesso à internet, segmentada por estado?
-- Em qual língua são ministradas as disciplinas nas escolas indígenas, e como isso se relaciona com a preservação das línguas maternas das tribos?
-- A presença de computadores nas escolas indígenas tem alguma influência na taxa de abandono escolar?
+- Where are the schools located in indigenous lands?
+- What is the dropout rate in indigenous schools and how does it compare to non-indigenous schools?
+- What is the average number of technological equipment per state in schools with indigenous education?
+- What percentage of schools in indigenous areas have internet access, segmented by state?
+- In which language are subjects taught in indigenous schools, and how does this relate to the preservation of tribal mother tongues?
+- Does the presence of computers in indigenous schools have any influence on the dropout rate?
 
-Essas questões são fundamentais para entender a realidade da educação indígena no Brasil e para direcionar esforços e políticas que visam melhorar essa importante área da educação.
+These questions are fundamental to understanding the reality of indigenous education in Brazil and to directing efforts and policies aimed at improving this important area of education.
 
-## O Projeto
-### 1. Busca Pelos Dados
-A busca pelos dados foi realizada por meio do site do governo (https://www.gov.br/inep/pt-br/acesso-a-informacao), em que foi-se buscado tabelas referentes ao censo escolar do Brasil em 2022. Foram encontradas duas tabelas para fazer parte da análise: 
+## The Project
+### 1. Data Search
+The data search was carried out through the brazilian government website (https://www.gov.br/inep/pt-br/acesso-a-informacao), where tables related to the school census of Brazil in 2022 were sought. Two tables were found to be part of the analysis:
 - [Microdados do Censo Escolar da Educacao no Brasil 2022](https://docs.google.com/spreadsheets/d/1er1GJqNIxP_sw-0k_DF3SqBpDyo0XOLU/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
 - [Taxa Rendimento Escolas 2022](https://docs.google.com/spreadsheets/d/1g02tYUN2sTgARp9_JTlF7RUMj3RhHHaZ/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
 
 
-A primeira tabela é referente a diversas informações sobre as escolas no Brasil (código da escola, têm ou nao internet, salas, etc.), possui 385 colunas. Já a segunda é em relação a taxa de rendimento escolar (notas, taxa de abandono, taxa de reprovação, etc.), possui 12 colunas. **Os data sets não estão armazenados no GitHub e sim no Google Drive devido ao tamanho dos arquivos.**
+The first table refers to various information about schools in Brazil (school code, internet availability, classrooms, etc.), with 385 columns. The second one relates to the school performance rate (grades, dropout rate, failure rate, etc.), with 12 columns. **The datasets are not stored on GitHub but on Google Drive due to the size of the files.**
 
 
-### 2. Coleta
-A coleta de dados foi realizada por meio do download de duas tabelas diretamente do site oficial do governo. Essa etapa foi crucial para garantir que os dados utilizados sejam precisos e confiáveis, uma vez que as fontes governamentais são reconhecidas como uma fonte primária de informações educacionais. A decisão de obter os dados diretamente do site do governo foi tomada para garantir que as informações coletadas estejam alinhadas com as fontes oficiais disponíveis.
+### 2. Data Collection
+Data collection was carried out by downloading two tables directly from the official government website. This step was crucial to ensure that the data used is accurate and reliable since government sources are recognized as a primary source of educational information. The decision to obtain the data directly from the government website was made to ensure that the collected information aligns with the official sources available.
 
-#### 2.1 Definição do Sistema de Cloud Computing
-A escolha da `Azure` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure_logo.png" alt="drawing" width="40"/> como sitema de cloud computing deste projeto foi baseada em sua reputação global como uma das principais plataformas de nuvem do mundo. Além disso, a Azure é conhecida por sua excelente integração com ferramentas amplamente utilizadas, como o Power BI, o que facilita a análise de dados. A plataforma Azure também se destaca pela sua segurança robusta e capacidade de escalabilidade, garantindo a proteção dos dados e sua flexibilidade.
+#### 2.1 Definition of Cloud Computing System
+The choice of `Azure` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure_logo.png" alt="drawing" width="40"/> as the cloud computing system for this project was based on its global reputation as one of the leading cloud platforms in the world. Additionally, Azure is known for its excellent integration with widely used tools such as Power BI, facilitating data analysis. The Azure platform also stands out for its robust security and scalability, ensuring data protection and flexibility.
 
-#### 2.2 Recursos de Armazenamento
-Inicialmente, foi-se criado uma conta na Azure de forma gratuita com uma quantia a ser utilizada por fins acadêmicos. Aqui, foi-se criado, em ordem:
-- Um `Resource Group` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/resource_group_icon.png" alt="drawing" width="40"/> contêiner lógico que ajuda a gerenciar e organizar recursos relacionados no Azure
-- `Storage Account` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/storage_account_icon.png" alt="drawing" width="40"/> um recurso da Azure que fornece armazenamento em nuvem de arquivos, sendo utilizado o `Azure Data Lake Storage 2gen` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/adls_icon.png" alt="drawing" width="40"/>
-- Container Bronze, Silver e Gold 
+#### 2.2 Storage Resources
+Initially, a free Azure account was created for academic purposes. Here, the following resources were created in order:
+- `A Resource Group` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/resource_group_icon.png" alt="drawing" width="40"/> a logical container that helps manage and organize related resources in Azure
+- `Storage Account` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/storage_account_icon.png" alt="drawing" width="40"/> an Azure resource that provides cloud storage for files, using Azure Data Lake Storage Gen2 <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/adls_icon.png" alt="drawing" width="40"/>
+- Bronze, Silver, and Gold Containers
 
-Com isto, foi-se inserido os dados coletados do site governo no container Bronze. Posteriormente, após a realização de ETL, os dados ficarão armazenados na camada Silver e, por fim, na camada Gold. A definição de cada camada utilizada foi:
-- Bronze: dados brutos (raw) no formato da coleta, como JSON, CSV, XLS, Parquet
-- Silver: dados limpos e transformados, removendo colunas indesejadas, caracteres estranhos e removendo espaços
-- Gold: dados organizados, com join realizado entre tabelas caso necessário e com regras de negócios aplicados de acordo com as métricas / perguntas definidas que deverão ser respondidas
+With this setup, the collected data was stored in the Bronze container. Subsequently, after performing ETL, the data will be stored in the Silver layer and, finally, in the Gold layer. The definition of each used layer was:
+- Bronze: raw data in the format of collection, such as JSON, CSV, XLS, Parquet
+- Silver: cleaned and transformed data, removing unwanted columns, special characters, and spaces
+- Gold: organized data, with joins between tables if necessary, and business rules applied according to defined metrics / questions that need to be answered
 
 <div align="center">
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG" alt="Containers de Armazenamento / Layers do Data Lake" />
