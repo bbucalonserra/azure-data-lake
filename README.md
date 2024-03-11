@@ -23,7 +23,7 @@ Education is a crucial aspect of human and social development, playing a fundame
 
 
 
-## Objetivo
+## Objective
 The objective of this project is to examine and analyze different facets of education in indigenous schools in Brazil. The focus will be on existing educational data. Through this analysis, it is intended to address important issues that will provide insights into the current situation of indigenous education in the country and highlight areas that require attention for improvements. Throughout this investigation, we will seek to answer the following crucial questions:
 
 - Where are the schools located in indigenous lands?
@@ -75,17 +75,17 @@ With this setup, the collected data was stored in the Bronze container. Subseque
 </div>
 
 
-### 3. Modelagem e Carga
-A modelagem de dados é um processo fundamental no campo da ciência da computação e da gestão de informações. A principal finalidade da modelagem de dados é garantir que os dados sejam organizados, armazenados e gerenciados de forma eficiente e precisa para atender às necessidades específicas de uma organização ou projeto. **Aqui, Modelagem e Carga estão no mesmo tópico porque será utilizado diretamente um sistema de Data Lake, armazenando os dados por camadas.**
+### 3. Modeling and Loading
+Data modeling is a fundamental process in the field of computer science and information management. The main purpose of data modeling is to ensure that data is organized, stored, and managed efficiently and accurately to meet the specific needs of an organization or project. **Here, Modeling and Loading are in the same topic because a Data Lake system will be directly used, storing the data by layers.** 
 
-#### 3.1 Conexão Data Lake e Databricks
-Agora, é necessário realizar verificações das transformações realizadas nos dados brutos. Para isto, será usado o recurso Azure Databricks. 
-Para criar uma conexão entre o Data Lake e o Databricks, será necessário criar os seguintes recursos:
-- `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/dbx_icon.png" alt="drawing" width="40"/> plataforma de análise de dados na nuvem que combina recursos de big data e análise avançada
-- `Registration App` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/app_reg_icon.jpeg" alt="drawing" width="30"/> a entidade que representa uma aplicação ou serviço que deseja acessar os recursos na plataforma Azure. É identificação para um aplicativo ou serviço que quer fazer alterações na nuvem da Microsoft
-- `Key Vault` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/key%20vault%20icon.png" alt="drawing" width="40"/> serviço de gerenciamento de chaves e segredos
+#### 3.1 Data Lake and Databricks Connection
+Now, it is necessary to perform checks on the transformations made to the raw data. For this, the Azure Databricks feature will be used.
+To create a connection between the Data Lake and Databricks, the following resources need to be created:
+- `Databricks` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/dbx_icon.png" alt="drawing" width="40"/> a cloud-based data analytics platform that combines big data and advanced analytics resources
+- `Registration App` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/app_reg_icon.jpeg" alt="drawing" width="30"/> the entity representing an application or service that wants to access resources in the Azure platform. It is an identifier for an application or service that wants to make changes in the Microsoft cloud
+- `Key Vault` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/key%20vault%20icon.png" alt="drawing" width="40"/> a key and secret management service
 
-Com os recursos criados, basta entrar no Databricks, criar um notebook e utilizar o seguinte código em `Spark`:
+With the resources created, just go to Databricks, create a notebook, and use the following Spark code:
 
 ```py
 service_credential = dbutils.secrets.get(scope="<scope>",key="<service-credential-key>")
@@ -97,18 +97,17 @@ spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account>.dfs.core
 spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account>.dfs.core.windows.net", "https://login.microsoftonline.com/<directory-id>/oauth2/token")
 ```
 
-Em que:
-- scope = secret scope, criado no próprio Databricks
-- service-credential-key = credential key do Key Vault
+Where:
+- scope = secret scope, created in Databricks itself
+- service-credential-key = credential key of Key Vault
 - storage-account = Storage Account
-- application-id = application ID do App Registration
-- directory-id = directory ID do App Registration
+- application-id = application ID of App Registration
+- directory-id = directory ID of App Registration
 
-Feito isto, tem-se uma conexão entre o Databricks e o Data Lake. Agora já é possível criar tabelas e popula-las com os dados do Lake.
+Once this is done, there is a connection between Databricks and the Data Lake. Now it is possible to create tables and populate them with data from the Lake.
 
-
-#### 3.2 Criação de Schema
-Dentro do Databricks, por viés organizacional, será necessário criar schemas para armazenas as tabelas de análises. Será criado um schema por camada do Data Lake. Para isto, basta abrir um notebook e utilizar os seguintes comandos em SQL:
+#### 3.2 Schema Creation
+Within Databricks, for organizational bias, it will be necessary to create schemas to store the analysis tables. One schema will be created for each layer of the Data Lake. To do this, simply open a notebook and use the following SQL commands:
 
 ```py
 CREATE SCHEMA bronze;
@@ -118,32 +117,32 @@ CREATE SCHEMA silver;
 CREATE SCHEMA gold;
 ```
 
-#### 3.3 Criação das Tabelas da Camada Bronze
-No próprio Databricks, será aberto um notebook para verificar a qualidade dos dados presentes na camada Bronze. Para isto, a utilização de SPARK para leitura dos dados em CSV armazenados como `BLOBS` será utilizada em conjunto a criação de views:
+#### 3.3 Creation of Bronze Layer Tables
+In Databricks itself, a notebook will be opened to check the data quality present in the Bronze layer. For this, the use of SPARK to read the data in CSV stored as BLOBS will be used in conjunction with the creation of views:
 
 **Tabela microdados_ed_basica_2022**
 
-Visualização da Tabela
+Table View
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').display()
 ```
-Criação de View
+Table Visualization
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
 ```
 **Tabela tx_rend_escolas_2022**
 
-Visualização da Tabela
+Table View
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').display()
 ```
-Criação de View
+Table Visualiation
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
 ```
 
-Com isto, foi-se visto algumas inconsistências nos dados, como caracteres especiais e colunas indesejadas.
-Foi feito o armazenamento destes dados no schema BRONZE. Para esta atividade, basta utilizar comandos em SQL:
+With this, some inconsistencies in the data were observed, such as special characters and unwanted columns.
+The data was stored in the BRONZE schema. For this activity, SQL commands were used:
 
 **Tabela microdados_ed_basica_2022**
 ```py
@@ -163,27 +162,26 @@ OPTIONS (
 )
 ```
 
-Observação: a tipologia dos dados ainda não foi definida por serem dados crus (raw). Elas serão definidas na camada Silver.
+Note: data types have not been defined yet because they are raw data. They will be defined in the Silver layer.
 
 
 #### 3.4 ETL - Extract, Transform e Load (Bronze - Silver)
-Após a inserção dos dados brutos na camada Bronze, selecionado as colunas, notado algumas inconsistências nos dados e criado as tabelas, a próxima etapa é a realização das transformações. Para tal atividade, foi-se utilizado o recurso `Data Factory` <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure-data-factory2539.jpg" alt="drawing" width="40"/>, visto que, além de ser uma ferramenta visual e de fácil uso, as transformações necessárias não são avançadas. A linguagem utilizada por este recurso é chamada de "Linguagem de Expressão de Transformação de Dados" (Data Flow Expression Language). Essa linguagem permite que você defina transformações de dados usando uma sintaxe semelhante ao SQL e inclui funções e operadores para executar operações de transformação, filtragem, projeção e muito mais. Abaixo, estão as transformações utilizadas no Data Factory:
+After inserting the raw data into the Bronze layer, selecting the columns, noticing some data inconsistencies, and creating the tables, the next step is to perform the transformations. For this task, the `Data Factory` resource <img align="center" src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/azure-data-factory2539.jpg" alt="drawing" width="40"/>, was used, as it is a visual and easy-to-use tool, and the required transformations are not advanced. The language used by this resource is called "Data Flow Expression Language." This language allows you to define data transformations using a syntax similar to SQL and includes functions and operators to perform transformation, filtering, projection, and much more. Below are the transformations used in Data Factory:
 
 ![ETL - Bronze para Silver](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_bronze_to_silver.PNG)
 
 
-Descrição das transformações:
-- Coleta dos dados do Data Lake
-- `SELECT`  para selecionar as colunas utilizadas na análise
-- `DERIVED COLUMN` para para remoção de caracteres especiais e estranhos das colunas
-- `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Silver
+Description of the transformations:
+- Data collection from the Data Lake
+- `SELECT` to select the columns used in the analysis
+- `DERIVED COLUMN` to remove special and strange characters from the columns
+- `SINK`  to send the transformed data back to the Data Lake, but now stored in the Silver layer/container
 
 
+#### 3.5 Creation of Silver Layer Tables
+The next step is to analyze the resulting data from the ETL process from the Bronze to Silver layer. To do this, it will be necessary to create the new tables after the ETL in Databricks already with the  **data typology defined and the variables of null or not null as well**:
 
-#### 3.5 Criação das Tabelas da Camada Silver
-A próxima etapa é análisar os dados resultantes da ETL da camada Bronze para Silver. Para isto, será necessário criar as novas tabelas após a ETL no Databricks já com a **tipologia dos dados definida e as variáveis de null ou not null também**:
-
-**Tabela Educacao_basica_2022**
+**Table Educacao_basica_2022**
 ```py
 CREATE TABLE silver.educacao_basica_2022
   (NU_ANO_CENSO INT NOT NULL,
@@ -227,7 +225,7 @@ OPTIONS (
 )
 ```
 
-**Tabela tx_rend_escolas_2022**
+**Table tx_rend_escolas_2022**
 ```py
 CREATE TABLE silver.tx_rend_escolas_2022 
 (
@@ -252,19 +250,19 @@ OPTIONS (
 ```
 
 #### 3.6 ETL - Extract, Transform e Load (Silver - Gold)
-Agora, será realizado a segunda e última ETL que será referente a camada Silver para a Gold. Aqui, foi-se feito o join das duas tabelas através da coluna de Código da Escola (1:1), realizado a soma total de equipamentos por escola (visto que para a análise, apenas é interessante saber a quantidade total e nao separada por tipo de equipamento) e remoção de mais algumas colunas nao utilizadas:
+Now, the second and final ETL will be performed, which will be related to the Silver layer to Gold. Here, the join of the two tables was made through the School Code column (1:1), the total sum of equipment per school was calculated (since for the analysis, it is only interesting to know the total quantity and not separated by type of equipment), and some more unused columns were removed:
 
 ![ETL - Silver para Gold](https://github.com/bbucalonserra/data_engineering/blob/main/pictures/ETL_silver_to_gold.PNG)
 
-Descrição das transformações:
-- Coleta dos dados do Data Lake
-- `JOIN`  para juntar ambas as tabelas
-- `SELECT` para remoção de algumas colunas
-- `DERIVED COLUMN` para remoção de caracteres especiais remanescentes
-- `SINK` para enviar os dados transformados de volta ao Data Lake, porém, agora armazenados na camada / container Gold
+Description of transformations:
+- Data collection from the Data Lake
+- `JOIN`  to merge both tables
+- `SELECT`  to remove some columns
+- `DERIVED COLUMN`  to remove any remaining special characters
+- `SINK`  to send the transformed data back to the Data Lake, but now stored in the Gold layer/container
 
-#### 3.7 Criação das Tabelas da Camada Gold
-Por fim, agora é possível realizar a análise final de uma forma muito mais prática, rápida e consistente, visto que apenas possuimos colunas utilizáveis e de acordo com as regras de negócio das análises. 
+#### 3.7 Creation of Gold Layer Tables
+Finally, it is now possible to perform the final analysis in a much more practical, fast, and consistent way, since we only have usable columns according to the business rules of the analyses.
 
 ``` py
 CREATE TABLE gold.educacao_rend_escolas_joined
@@ -310,8 +308,8 @@ OPTIONS (
 )
 ```
 
-#### 3.8 Catálogo de Dados
-Um catálogo de dados é uma ferramenta que organiza e descreve informações sobre conjuntos de dados disponíveis, fornecendo detalhes como origem, estrutura, significado e relação entre eles. É essencial para a gestão e utilização eficiente dos dados em uma organização. Abaixo está o Catálogo referente a tabela final, na camada Gold:
+#### 3.8 Data Catalog
+A data catalog is a tool that organizes and describes information about available datasets, providing details such as origin, structure, meaning, and relationship between them. It is essential for the management and efficient use of data in an organization. Below is the catalog for the final table in the Gold layer:
 
 
 | id | variavel | descrição | tipo | mínimo | máximo |
@@ -348,26 +346,27 @@ Um catálogo de dados é uma ferramenta que organiza e descreve informações so
 | 31 | Taxa_de_Abandono_Educacao_Basica         | Taxa de abandono na educação básica             | FLOAT  | 0.0    | 9.0    |
 
 
-### 4. Análise
-A análise de dados é uma prática essencial em um mundo cada vez mais digital e orientado por informações. Ela desempenha um papel fundamental em diversas áreas, desde o mundo dos negócios até a pesquisa acadêmica. O principal intuito das grandes empresas de tecnologia é se tornaram cada vez mais data-driven, ou seja, movidas por dados. Nesta etapa final, a análise será feita em relação a educação em terras indígenas no Brasil.
+### 4. Analysis
+Data analysis is an essential practice in an increasingly digital and information-driven world. It plays a fundamental role in various areas, from the business world to academic research. The primary goal of major technology companies is to become increasingly data-driven, meaning they are guided by data. In this final stage, the analysis will focus on education in indigenous lands in Brazil.
 
 
-#### 4.1 Qualidade dos Dados
-Antes de se aprofundar na análise em si, é crucial que realizar uma avaliação da qualidade dos dados contidos na camada gold (camada final) para compreender de forma mais abrangente como esses dados podem influenciar as análises finais que serão conduzidas. Nesse contexto, será dedicado nossa atenção à identificação de possíveis inconsistências ou falhas nos dados, visando assegurar que as análises subsequentes sejam fundamentadas em informações confiáveis.
-Ainda existem alguns problemas com a qualidade de dados para algumas colunas.
-A coluna **Nome_do_Municipio** ainda está obtendo o valor "�" para letras com acento ou para a letra "ç" ("ainda" pois este problema foi tratado na ETL da camada Bronze para Silver). Como são problemas apenas com nomenclatura isto não afetará as respostas que foram respondidas abaixo, apenas caso seja realizada a criação de um dashboard data visualization com, por exemplo, um gráfico de mapa, com caracteres "�", o Power BI não conseguirá identificar a localização do munícipio.
-A coluna **Taxa_de_Aprovacao_Educacao_Basica**, por algum motivo ao longo das ETLS, está com valores apenas nulos. Isto faz com que análises referentes a aprovação de alunos em escolas indígenas, um comparativo entre aprovações com alunos em escolas em locais indígenas e escolas comuns fique impossível de ser realizada. 
-A coluna **Salas_Existentes** está com valores nulos também, possívelmente por alguma etapa da ETL. Isto faz com que análises sobre a quantidade de alunos por sala em escolas em locais indígenas, ou verificações se a infraestrutura das escolas em locais indígenas atende a necessidade da população.
-A coluna **Computadores** e **Computadores Administrativos** também estão com valores nulos, possívelmente por alguma etapa da ETL. Isto faz com que seja impossível responder as perguntas referentes a computadores nas escolas ("A presença de computadores nas escolas indígenas tem alguma influência na taxa de abandono escolar?") e talvez seja enviesado os resultados referentes a equipamentos tecnológicos. 
-Para o restante dos dados, nao foi-se encontrado problemas. No entanto, seria interessante remover algumas colunas para melhorar o processamento dos dados nas queries visto que nem todas as colunas foram utilizadas.
+#### 4.1 Data Quality
+Before delving into the analysis itself, it is crucial to perform an assessment of the data quality contained in the gold layer (final layer) to comprehensively understand how these data may influence the final analyses to be conducted. In this context, our attention will be dedicated to identifying possible inconsistencies or flaws in the data, aiming to ensure that subsequent analyses are based on reliable information.
+
+There are still some issues with the data quality for certain columns.
+The column **Nome_do_Municipio** is still obtaining the value "�" for letters with accents or for the letter "ç" ("still" because this issue was addressed in the ETL from Bronze to Silver layer). Since these are only naming problems, it will not affect the answers provided below. However, in the case of creating a data visualization dashboard, for example, a map chart with "�" characters, Power BI will not be able to identify the municipality's location.
+The column **Taxa_de_Aprovacao_Educacao_Basica** has null values throughout the ETL process for some reason. This prevents analyses related to student approval in indigenous schools, a comparison between approvals with students in indigenous areas and regular schools from being performed.
+The column **Salas_Existentes** also has null values, possibly due to some stage of the ETL process. This prevents analyses on the number of students per classroom in schools in indigenous areas or checks if the infrastructure of schools in indigenous areas meets the population's needs.
+The columns **Computadores** and **Computadores_Administrativos** are also null, possibly due to some stage of the ETL process. This prevents answering questions regarding computers in indigenous schools ("Does the presence of computers in indigenous schools have any influence on the dropout rate?") and may bias the results regarding technological equipment.
+For the remaining data, no issues were found. However, it would be interesting to remove some columns to improve data processing in queries since not all columns were used.
 
 
-#### 4.2 Solução dos Problemas
-Neste segmento, será apresentada uma análise e as respostas para as perguntas levantadas em relação à educação indígena no Brasil. Através de representações gráficas e análises, serão oferecidos insights sobre a educação em terras indígenas.
-Ao longo deste tópico, será encontrado gráficos e análises que abordarão as perguntas-chave, incluindo a localização das escolas em terras indígenas, as taxas de abandono escolar, a disponibilidade de equipamentos tecnológicos, o acesso à internet e o idioma de instrução. Para todas as análises abaixo foi-se utilizada a linguagem `SQL (Structured Query Language)`.
+#### 4.2 Problem Resolution
+In this section, an analysis and answers to the questions raised regarding indigenous education in Brazil will be presented. Through graphical representations and analysis, insights will be provided regarding education in indigenous lands.
+Throughout this section, there will be charts and analyses addressing key questions, including the location of schools in indigenous lands, dropout rates, availability of technological equipment, internet access, and language of instruction. For all analyses below, the `SQL` (Structured Query Language) was used.
 
 
-**1. Onde estão localizadas as escolas em terras indigenas?**
+**1. Where are located the indiginous schools in Brazil?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -386,20 +385,20 @@ GROUP BY Nome_UF
 ORDER BY Contagem_Escolas DESC
 ```
 
-Resposta: As escolas em terras indígenas estão localizadas em diversos estados do Brasil. Com base na contagem de escolas por estado, podemos identificar os estados com o maior número de escolas em terras indígenas:
-- Amazonas: 2,190 escolas
-- Roraima: 674 escolas
-- Maranhão: 642 escolas
-- Pará: 618 escolas
-- Acre: 456 escolas
+Response: Schools in indigenous lands are located in various states of Brazil. Based on the count of schools per state, we can identify the states with the highest number of schools in indigenous lands:
+- Amazonas: 2,190 schools
+- Roraima: 674 schools
+- Maranhão: 642 schools
+- Pará: 618 schools
+- Acre: 456 schools
 
-Portanto, as escolas em terras indígenas estão principalmente concentradas nos estados da região Norte, com Amazonas e Roraima liderando em termos de quantidade de escolas. Essa distribuição reflete a presença de comunidades indígenas nessas regiões e a necessidade de educação nas áreas de suas terras.
+Therefore, schools in indigenous lands are mainly concentrated in the states of the Northern region, with Amazonas and Roraima leading in terms of the number of schools. This distribution reflects the presence of indigenous communities in these regions and the need for education in the areas of their lands.
 
 </details>
 </details>
 
 
-**2. Qual é a taxa de abandono escolar nas escolas indígenas? Este valor é mais mais ou menos elevado que escolas comuns?**
+**2. What is the dropout rate in indigenous schools? Is this value higher or lower than regular schools?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -437,14 +436,14 @@ FROM ED_INDIGENA, ED_GERAL;
 ```
 
 
-Resposta: A taxa de abandono escolar nas escolas indígenas é de 18.59%, enquanto nas escolas comuns é de 7.32%. Portanto, podemos concluir que a taxa de abandono escolar nas escolas indígenas é consideravelmente mais elevada do que nas escolas comuns, com 11.27% maior que escolas comuns. Isso sugere que as escolas indígenas podem enfrentar desafios adicionais ou diferentes que contribuem para uma taxa de abandono mais alta em comparação com as escolas não indígenas. É importante investigar e abordar esses desafios para melhorar o acesso e a qualidade da educação para as comunidades indígenas.
+Response: The dropout rate in indigenous schools is 18.59%, while in regular schools it is 7.32%. Therefore, we can conclude that the dropout rate in indigenous schools is considerably higher than in regular schools, with a difference of 11.27% higher than regular schools. This suggests that indigenous schools may face additional or different challenges that contribute to a higher dropout rate compared to non-indigenous schools. It is important to investigate and address these challenges to improve access and the quality of education for indigenous communities.
 
 </details>
 </details>
 
 
 
-**3. Qual a media de equipamentos tecnologicos por estado em escolas com educação indigena?**
+**3. What is the average number of technological equipment per state in schools with indigenous education?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -466,12 +465,12 @@ GROUP BY ALL
 ORDER BY Media_Equip DESC
 ```
 
-Resposta: O gráfico a cima mostra a média de equipamentos tecnológicos disponíveis em escolas com educação indígena em cada estado. Santa Catarina tem a maior média, com 9 equipamentos, enquanto Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá e Maranhão têm médias muito baixas, próximas a zero. Esses números indicam a disparidade na disponibilidade de equipamentos tecnológicos em escolas indígenas em diferentes estados do Brasil.
+Answer: The above graph shows the average number of technological equipment available in schools with indigenous education in each state. Santa Catarina has the highest average, with 9 equipment, while Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá, and Maranhão have very low averages, close to zero. These numbers indicate the disparity in the availability of technological equipment in indigenous schools in different states of Brazil.
 
 </details>
 </details>
 
-**4. Qual a porcentagem de escolas em locais indigenas que possuem internet por estado?**
+**4. What is the percentage of schools in indigenous locations that have internet access by state?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -492,12 +491,12 @@ GROUP BY NOME_UF
 ORDER BY PORCENTAGEM_COM_INTERNET DESC
 ```
 
-Resposta: Os números a cima números representam a porcentagem de escolas indígenas em cada estado que têm acesso à internet. Enquanto alguns estados, como Paraná e Goiás, têm 100% de suas escolas indígenas com acesso à internet, outros, como Piauí e Acre, têm uma porcentagem muito baixa ou mesmo nula de escolas com acesso à internet. Isso reflete a variação na infraestrutura de tecnologia da informação em diferentes regiões do país e destaca a necessidade de melhorar o acesso à internet em escolas indígenas em todo o Brasil.
+Answer: The above numbers represent the percentage of indigenous schools in each state that have internet access. While some states, such as Paraná and Goiás, have 100% of their indigenous schools with internet access, others, such as Piauí and Acre, have a very low or even zero percentage of schools with internet access. This reflects the variation in information technology infrastructure in different regions of the country and highlights the need to improve internet access in indigenous schools across Brazil.
 
 </details>
 </details>
 
-**5. Em qual língua é ministrada as disciplinas nas escolas indígenas? Estamos mantendo as raízes das tribos em relação à língua materna?**
+**5. In which language are subjects taught in indigenous schools? Are we maintaining the roots of the tribes regarding the mother tongue?**
 
 <details>
   <summary>Mostrar Resposta</summary>
@@ -518,13 +517,13 @@ GROUP BY Lingua_Indigena
 ORDER BY Lingua_indigena
 ```
 
-  Resposta: Nas escolas indígenas, as disciplinas são ministradas em diferentes línguas, e algumas escolas adotam uma abordagem bilíngue. Aqui está a distribuição com base nos dados:
-  - Somente língua indígena: 3.30% das escolas indígenas adotam exclusivamente a língua indígena como meio de instrução.
-  - Português: 22.70% das escolas indígenas ministram as disciplinas apenas em português.
-  - Língua indígena e português: A maioria das escolas indígenas, 71.97%, adota uma abordagem bilíngue, ministrando as disciplinas tanto na língua indígena quanto em português.
-  - Não aplicável sem educação indígena: 2.02% dos dados não são aplicáveis, indicando que essas escolas não oferecem educação indígena ou não forneceram informações sobre a língua de instrução.
+Answer: In indigenous schools, subjects are taught in different languages, and some schools adopt a bilingual approach. Here is the distribution based on the data:
+  - Indigenous language only: 3.30% of indigenous schools exclusively adopt the indigenous language as the medium of instruction
+  - Portuguese: 22.70% of indigenous schools teach subjects only in Portuguese
+  - Indigenous language and Portuguese: The majority of indigenous schools, 71.97%, adopt a bilingual approach, teaching subjects in both the indigenous language and Portuguese
+  - Not applicable without indigenous education: 2.02% of the data is not applicable, indicating that these schools do not offer indigenous education or did not provide information about the language of instruction
 
-  Portanto, a maioria das escolas indígenas no Brasil adota uma abordagem bilíngue, ministrando as disciplinas tanto na língua indígena quanto em português, o que reflete a importância de preservar as raízes das tribos   em relação à língua materna, ao mesmo tempo em que oferece acesso à educação em português.
+Therefore, most indigenous schools in Brazil adopt a bilingual approach, teaching subjects in both the indigenous language and Portuguese, which reflects the importance of preserving the roots of the tribes regarding the mother tongue while providing access to education in Portuguese.
 
 </details>
 </details>
