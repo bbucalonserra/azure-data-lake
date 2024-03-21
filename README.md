@@ -378,12 +378,12 @@ Throughout this section, there will be charts and analyses addressing key questi
 Query:
 ``` py
 SELECT
-Nome_UF,
-COUNT(Codigo_da_Escola) AS Contagem_Escolas
-FROM gold.educacao_rend_escolas_joined
-WHERE Localizacao_Diferenciada = 2
-GROUP BY Nome_UF
-ORDER BY Contagem_Escolas DESC
+STATE_NAME,
+COUNT(SCHOOL_CODE) AS COUNT_SCHOOLS
+FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
+WHERE DISTINCT_LOCATION = 2
+GROUP BY STATE_NAME
+ORDER BY COUNT_SCHOOLS DESC
 ```
 
 Response: Schools in indigenous lands are located in various states of Brazil. Based on the count of schools per state, we can identify the states with the highest number of schools in indigenous lands:
@@ -409,31 +409,31 @@ Therefore, schools in indigenous lands are mainly concentrated in the states of 
 
 Query:
 ``` py
-WITH ED_INDIGENA AS (
+WITH INDIGENOUS_ED AS (
   SELECT
-    AVG(Taxa_de_Abandono_Educacao_Basica) AS MEDIA_ED_BASICA_INDIGENA
-  FROM gold.educacao_rend_escolas_joined
+    AVG(BASIC_EDUCATION_ABANDONMENT_RATE) AS AVERAGE_INDIGENOUS_EDUCATION
+  FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
   WHERE
-    Localizacao_Diferenciada = 2
-    AND Taxa_de_Abandono_Educacao_Basica <> 0
-    AND Taxa_de_Abandono_Educacao_Basica IS NOT NULL 
+    DISTINCT_LOCATION = 2
+    AND BASIC_EDUCATION_ABANDONMENT_RATE <> 0
+    AND BASIC_EDUCATION_ABANDONMENT_RATE IS NOT NULL 
 ),
 
-ED_GERAL AS (
+GENERAL_ED AS (
   SELECT
-    AVG(Taxa_de_Abandono_Educacao_Basica) AS MEDIA_ED_BASICA_GERAL
-  FROM gold.educacao_rend_escolas_joined
+    AVG(BASIC_EDUCATION_ABANDONMENT_RATE) AS AVERAGE_BASIC_EDUCATION_GENERAL
+  FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
   WHERE
-    Taxa_de_Abandono_Educacao_Basica <> 0
-    AND Taxa_de_Abandono_Educacao_Basica IS NOT NULL  
+    BASIC_EDUCATION_ABANDONMENT_RATE <> 0
+    AND BASIC_EDUCATION_ABANDONMENT_RATE IS NOT NULL  
 )
 
 SELECT
-  ROUND(ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA, 2) AS MEDIA_ED_BASICA_INDIGENA,
-  ROUND(ED_GERAL.MEDIA_ED_BASICA_GERAL, 2) AS MEDIA_ED_BASICA_GERAL,
-  ROUND((ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA - ED_GERAL.MEDIA_ED_BASICA_GERAL), 2) AS DIFERENCA_PERCENTUAL,
-  ROUND((ED_INDIGENA.MEDIA_ED_BASICA_INDIGENA - ED_GERAL.MEDIA_ED_BASICA_GERAL) / ED_GERAL.MEDIA_ED_BASICA_GERAL * 100, 2) AS DIFERENCA_EM_PORCENTAGEM
-FROM ED_INDIGENA, ED_GERAL;
+  ROUND(INDIGENOUS_ED.AVERAGE_INDIGENOUS_EDUCATION, 2) AS AVERAGE_INDIGENOUS_ED,
+  ROUND(GENERAL_ED.AVERAGE_BASIC_EDUCATION_GENERAL, 2) AS AVERAGE_GENERAL_ED,
+  ROUND((INDIGENOUS_ED.AVERAGE_INDIGENOUS_EDUCATION - GENERAL_ED.AVERAGE_BASIC_EDUCATION_GENERAL), 2) AS PERCENTUAL_DIFFERENCE,
+  ROUND((INDIGENOUS_ED.AVERAGE_INDIGENOUS_EDUCATION - GENERAL_ED.AVERAGE_BASIC_EDUCATION_GENERAL) / GENERAL_ED.AVERAGE_BASIC_EDUCATION_GENERAL * 100, 2) AS DIFFERENCE_IN_PERCENTAGE
+FROM INDIGENOUS_ED, GENERAL_ED
 ```
 
 
@@ -455,15 +455,15 @@ Response: The dropout rate in indigenous schools is 18.59%, while in regular sch
 Query:
 ``` py
 SELECT
-  Nome_UF,
-  ROUND(AVG(Total_Equipamentos),2) AS Media_Equip
-FROM gold.educacao_rend_escolas_joined
+  STATE_NAME,
+  ROUND(AVG(TOTAL_EQUIPMENTS),2) AS AVERAGE_EQUIPMENTS
+FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
 WHERE
-  Taxa_de_Abandono_Educacao_Basica IS NOT NULL
-  AND Taxa_de_Abandono_Educacao_Basica <> 0
-  AND Localizacao_Diferenciada = 2
+  BASIC_EDUCATION_ABANDONMENT_RATE IS NOT NULL
+  AND BASIC_EDUCATION_ABANDONMENT_RATE <> 0
+  AND DISTINCT_LOCATION = 2
 GROUP BY ALL
-ORDER BY Media_Equip DESC
+ORDER BY AVERAGE_EQUIPMENTS DESC
 ```
 
 Answer: The above graph shows the average number of technological equipment available in schools with indigenous education in each state. Santa Catarina has the highest average, with 9 equipment, while Mato Grosso, Tocantins, Mato Grosso do Sul, Acre, Amapá, and Maranhão have very low averages, close to zero. These numbers indicate the disparity in the availability of technological equipment in indigenous schools in different states of Brazil.
@@ -483,13 +483,13 @@ Answer: The above graph shows the average number of technological equipment avai
 Query:
 ``` py
 SELECT
-  NOME_UF,
-  ROUND((SUM(CASE WHEN Internet = 1 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) AS PORCENTAGEM_COM_INTERNET
-FROM gold.educacao_rend_escolas_joined
+  STATE_NAME,
+  ROUND((SUM(CASE WHEN INTERNET = 1 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) AS PERCENTAGE_WITH_INTERNET
+FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
 WHERE 
-  Localizacao_Diferenciada = 2
-GROUP BY NOME_UF
-ORDER BY PORCENTAGEM_COM_INTERNET DESC
+  DISTINCT_LOCATION = 2
+GROUP BY STATE_NAME
+ORDER BY PERCENTAGE_WITH_INTERNET DESC
 ```
 
 Answer: The above numbers represent the percentage of indigenous schools in each state that have internet access. While some states, such as Paraná and Goiás, have 100% of their indigenous schools with internet access, others, such as Piauí and Acre, have a very low or even zero percentage of schools with internet access. This reflects the variation in information technology infrastructure in different regions of the country and highlights the need to improve internet access in indigenous schools across Brazil.
@@ -509,13 +509,13 @@ Answer: The above numbers represent the percentage of indigenous schools in each
 Query:
 ``` py
 SELECT
-  Lingua_Indigena,
-  ROUND(COUNT(Codigo_da_Escola) * 100.0 / SUM(COUNT(Codigo_da_Escola)) OVER (), 2) AS PORCENTAGEM_DE_ESCOLAS
-FROM gold.educacao_rend_escolas_joined
+  INDIGENOUS_LANGUAGE,
+  ROUND(COUNT(SCHOOL_CODE) * 100.0 / SUM(COUNT(SCHOOL_CODE)) OVER (), 2) AS PERCENTAGE_OF_SCHOOLS
+FROM gold.EDUCATION_RETENTION_SCHOOLS_JOINED
 WHERE
-  Localizacao_Diferenciada = 2
-GROUP BY Lingua_Indigena
-ORDER BY Lingua_indigena
+  DISTINCT_LOCATION = 2
+GROUP BY INDIGENOUS_LANGUAGE
+ORDER BY INDIGENOUS_LANGUAGE
 ```
 
 Answer: In indigenous schools, subjects are taught in different languages, and some schools adopt a bilingual approach. Here is the distribution based on the data:
