@@ -526,3 +526,8 @@ Therefore, most indigenous schools in Brazil adopt a bilingual approach, teachin
 
 
 ### 5. Self Assessment
+The project was conducted with an extremely detailed approach, resulting in documentation that I consider excellent. Every line of code and step of the cloud computing system was explained, including not only what was done. This transparency and clarity significantly contributed to my understanding of the process.
+
+Additionally, the development of this work was integrated with studies, covering detailed explanations of the types of data engineering performed to use Azure, creation of tables, ETL processes and analysis. This correlation between the practical project and the theoretical foundation was very important, providing a deeper and contextualized understanding of the entire analytical process.
+
+The cloud computing system presented the greatest challenge. Yet, I gleaned invaluable insights and a good data lake environment, enhancing my technical prowess and problem-solving skills. Despite its difficulty, navigating the cloud proved huge step in my studies, equipping me with the knowledge and confidence to tackle future endeavors.
