@@ -64,7 +64,6 @@ With this setup, the collected data was stored in the Bronze container. Subseque
 
 <div align="center">
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG" alt="Data Lake Layers" />
-  <p><em>Data Lake Layers</em></p>
 </div>
 
 
