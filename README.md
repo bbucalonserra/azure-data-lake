@@ -370,7 +370,7 @@ Throughout this section, there will be charts and analyses addressing key questi
 **1. Where are located the indiginous schools in Brazil?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
   
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/loc_escolas_indigenas.PNG" align="left"
      alt="loc_escola_indigena">
@@ -402,7 +402,7 @@ Therefore, schools in indigenous lands are mainly concentrated in the states of 
 **2. What is the dropout rate in indigenous schools? Is this value higher or lower than regular schools?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
   
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
      alt="taxa_de_abandono">
@@ -447,7 +447,7 @@ Response: The dropout rate in indigenous schools is 18.59%, while in regular sch
 **3. What is the average number of technological equipment per state in schools with indigenous education?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/media_equip_escolas_por_estado.PNG" align="left"
      alt="media_equipamentos_estado">
@@ -474,7 +474,7 @@ Answer: The above graph shows the average number of technological equipment avai
 **4. What is the percentage of schools in indigenous locations that have internet access by state?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/porcentagem_escolas_indigenas_com_internet.PNG" align="left"
@@ -500,7 +500,7 @@ Answer: The above numbers represent the percentage of indigenous schools in each
 **5. In which language are subjects taught in indigenous schools? Are we maintaining the roots of the tribes regarding the mother tongue?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/linguas_indigenas.PNG" align="left"
