@@ -20,7 +20,7 @@ Education is a crucial aspect of human and social development, playing a fundame
    - [4. Analysis](#4-analysis)
      - [4.1 Data Quality](#41-data-quality)
      - [4.2 Problem Resolution](#42-problem-resolution)
-   - [5. Self Assessment](#4-self-assessment)
+   - [5. Self Assessment](#5-self-assessment)
 
 
 
