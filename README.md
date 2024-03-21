@@ -68,11 +68,6 @@ With this setup, the collected data was stored in the Bronze container. Subseque
 
 
 
-<div align="center">
-  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG" />
-</div>
-
-
 ### 3. Modeling and Loading
 Data modeling is a fundamental process in the field of computer science and information management. The main purpose of data modeling is to ensure that data is organized, stored, and managed efficiently and accurately to meet the specific needs of an organization or project. **Here, Modeling and Loading are in the same topic because a Data Lake system will be directly used, storing the data by layers.** 
 
