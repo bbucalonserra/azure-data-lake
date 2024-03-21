@@ -38,9 +38,10 @@ These questions are fundamental to understanding the reality of indigenous educa
 ## The Project
 ### 1. Data Search
 The data search was carried out through the brazilian government website (https://www.gov.br/inep/pt-br/acesso-a-informacao), where tables related to the school census of Brazil in 2022 were sought. Two tables were found to be part of the analysis:
-- [Microdados do Censo Escolar da Educacao no Brasil 2022](https://docs.google.com/spreadsheets/d/1er1GJqNIxP_sw-0k_DF3SqBpDyo0XOLU/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
-- [Taxa Rendimento Escolas 2022](https://docs.google.com/spreadsheets/d/1g02tYUN2sTgARp9_JTlF7RUMj3RhHHaZ/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
+- [Microdata from the School Census of Education in Brazil 2022](https://docs.google.com/spreadsheets/d/1er1GJqNIxP_sw-0k_DF3SqBpDyo0XOLU/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
+- [School Dropout Rate 2022](https://docs.google.com/spreadsheets/d/1g02tYUN2sTgARp9_JTlF7RUMj3RhHHaZ/edit?usp=sharing&ouid=105765042535713670711&rtpof=true&sd=true)
 
+*Note: the website is in portugese (PT-BR).*
 
 The first table refers to various information about schools in Brazil (school code, internet availability, classrooms, etc.), with 385 columns. The second one relates to the school performance rate (grades, dropout rate, failure rate, etc.), with 12 columns. **The datasets are not stored on GitHub but on Google Drive due to the size of the files.**
 
