@@ -124,7 +124,7 @@ Table Visualization
 ```py
 spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/microdata_basic_education_2022.csv').createOrReplaceTempView('microdata_basic_education_2022')
 ```
-**Tabela school_retention_rate_2022**
+**Table school_retention_rate_2022**
 
 Table View
 ```py
@@ -138,7 +138,7 @@ spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@microdata
 With this, some inconsistencies in the data were observed, such as special characters and unwanted columns.
 The data was stored in the BRONZE schema. For this activity, SQL commands were used:
 
-**Tabela microdata_basic_education_2022**
+**Table microdata_basic_education_2022**
 ```py
 CREATE TABLE bronze.microdata_basic_education_2022 USING CSV LOCATION 'abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/microdata_basic_education_2022.csv'
 OPTIONS (
@@ -146,7 +146,7 @@ OPTIONS (
   delimiter = ";"
 )
 ```
-**Tabela school_retention_rate_2022**
+**Table school_retention_rate_2022**
 ```py
 CREATE TABLE bronze.rend_escolar_2022
 USING CSV LOCATION 'abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/school_retention_rate_2022.csv'
