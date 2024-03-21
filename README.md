@@ -1,9 +1,10 @@
-# Basic Education of Schools in Brazilian Indigenous Territories
-Education is a crucial aspect of human and social development, playing a fundamental role in creating more just and egalitarian societies. Brazil, with its diversified cultural composition and numerous ethnic groups, including indigenous communities that contribute significantly to the nation's identity, requires special consideration for indigenous education. It is important to prioritize the preservation of cultural traditions and the empowerment of native communities.
+# Data Engineering Project
+A data engineering project involves designing, constructing, and maintaining the infrastructure necessary for the collection, storage, processing, and analysis of data. These projects often require expertise in programming languages like Python and usage of technologies like cloud-based solutions such as Azure, AWS or Google Cloud Platform. Data engineering is crucial for enabling organizations to derive insights, make data-driven decisions and build data-driven applications.
 
 # Index
 1. [Objective](#objective)
-2. [The Project](#the-project)
+2. [Problem Definition](#problem-definition)
+3. [The Project](#the-project)
    - [1. Data Search](#1-data-search)
    - [2. Data Collection](#2-data-collection)
      - [2.1 Definition of Cloud Computing System](#21-definition-of-cloud-computing-system)
@@ -22,6 +23,9 @@ Education is a crucial aspect of human and social development, playing a fundame
      - [4.2 Problem Resolution](#42-problem-resolution)
    - [5. Self Assessment](#5-self-assessment)
 
+
+## Problem Definition
+Education is a crucial aspect of human and social development, playing a fundamental role in creating more just and egalitarian societies. Brazil, with its diversified cultural composition and numerous ethnic groups, including indigenous communities that contribute significantly to the nation's identity, requires special consideration for indigenous education. It is important to prioritize the preservation of cultural traditions and the empowerment of native communities.
 
 
 ## Objective
