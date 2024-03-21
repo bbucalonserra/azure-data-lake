@@ -532,4 +532,4 @@ Also, the development of this work was integrated with studies, covering detaile
 
 The cloud computing system presented the greatest challenge. Yet, I gleaned invaluable insights and a good data lake environment, enhancing my technical prowess and problem-solving skills. Despite its difficulty, navigating the cloud proved huge step in my studies, equipping me with the knowledge and confidence to tackle future endeavors.
 
-**Additionally, I'm proud to share that my project received a perfect score of `10` from the esteemed professors at the university.**
+**Additionally, I'm proud to share that my project received a perfect score of `10` of `10` (MAXIMUM SCORE) from the esteemed professors at the university.**
