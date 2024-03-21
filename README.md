@@ -63,8 +63,8 @@ With this setup, the collected data was stored in the Bronze container. Subseque
 - Gold: organized data, with joins between tables if necessary, and business rules applied according to defined metrics / questions that need to be answered
 
 <div align="center">
-  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG" alt="Containers de Armazenamento / Layers do Data Lake" />
-  <p><em>Containers de Armazenamento / Layers do Data Lake</em></p>
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/containers_lake.PNG" alt="Data Lake Layers" />
+  <p><em>Data Lake Layers</em></p>
 </div>
 
 
