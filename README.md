@@ -120,25 +120,25 @@ CREATE SCHEMA gold;
 #### 3.3 Creation of Bronze Layer Tables
 In Databricks itself, a notebook will be opened to check the data quality present in the Bronze layer. For this, the use of SPARK to read the data in CSV stored as BLOBS will be used in conjunction with the creation of views:
 
-**Tabela microdados_ed_basica_2022**
+**Table microdata_basic_education_2022**
 
 Table View
 ```py
-spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').display()
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/microdados_ed_basica_2022.csv').display()
 ```
 Table Visualization
 ```py
-spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/microdata_basic_education_2022.csv').createOrReplaceTempView('microdata_basic_education_2022')
 ```
 **Tabela tx_rend_escolas_2022**
 
 Table View
 ```py
-spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').display()
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@microdata_basic_education_2022.dfs.core.windows.net/microdados_ed_basica_2022/school_retention_rate_2022.csv').display()
 ```
 Table Visualiation
 ```py
-spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv').createOrReplaceTempView('microdados_ed_basica_2022')
+spark.read.options(delimiter = ';', header = True).csv('abfss://bronze@microdata_basic_education_2022.dfs.core.windows.net/microdata_basic_education_2022/school_retention_rate_2022.csv').createOrReplaceTempView('microdata_basic_education_2022')
 ```
 
 With this, some inconsistencies in the data were observed, such as special characters and unwanted columns.
@@ -146,7 +146,7 @@ The data was stored in the BRONZE schema. For this activity, SQL commands were u
 
 **Tabela microdados_ed_basica_2022**
 ```py
-CREATE TABLE bronze.educacao_basica_2022 USING CSV LOCATION 'abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/microdados_ed_basica_2022.csv'
+CREATE TABLE bronze.microdata_basic_education_2022 USING CSV LOCATION 'abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/microdata_basic_education_2022.csv'
 OPTIONS (
   header = "true",
   delimiter = ";"
@@ -155,7 +155,7 @@ OPTIONS (
 **Tabela tx_rend_escolas_2022**
 ```py
 CREATE TABLE bronze.rend_escolar_2022
-USING CSV LOCATION 'abfss://bronze@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022.csv'
+USING CSV LOCATION 'abfss://bronze@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/school_retention_rate_2022.csv'
 OPTIONS (
   header = "true",
   delimiter = ";"
@@ -181,71 +181,71 @@ Description of the transformations:
 #### 3.5 Creation of Silver Layer Tables
 The next step is to analyze the resulting data from the ETL process from the Bronze to Silver layer. To do this, it will be necessary to create the new tables after the ETL in Databricks already with the  **data typology defined and the variables of null or not null as well**:
 
-**Table Educacao_basica_2022**
+**Table microdata_basic_education_2022**
 ```py
-CREATE TABLE silver.educacao_basica_2022
-  (NU_ANO_CENSO INT NOT NULL,
-  NO_REGIAO STRING NOT NULL,
-  NO_UF STRING NOT NULL,
-  NO_MESORREGIAO STRING NOT NULL,
-  NO_ENTIDADE STRING NOT NULL,
-  CO_ENTIDADE INTEGER NOT NULL,
-  TP_DEPENDENCIA INT,
-  TP_CATEGORIA_ESCOLA_PRIVADA INT,
-  TP_LOCALIZACAO INT,
-  QT_MAT_BAS INT,
-  QT_MAT_BAS_FEM INT,
-  QT_MAT_BAS_MASC INT,
-  QT_EQUIP_DVD INT,
-  QT_EQUIP_TV INT,
-  QT_EQUIP_LOUSA_DIGITAL INT,
-  QT_EQUIP_MULTIMIDIA INT,
-  QT_EQUIP_VIDEOCASSETE INT,
-  QT_EQUIP_PARABOLICA INT,
-  QT_EQUIP_COPIADORA INT,
-  QT_EQUIP_RETROPROJETOR INT,
-  QT_EQUIP_IMPRESSORA INT,
-  QT_EQUIP_IMPRESSORA_MULT INT,
-  QT_EQUIP_FAX INT,
-  QT_EQUIP_FOTO INT,
-  QT_COMPUTADOR INT,
-  QT_COMP_ADMINISTRATIVO INT,
-  QT_SALAS_EXISTENTES INT,
-  IN_INTERNET INT,
-  IN_EDUCACAO_INDIGENA INT,
-  TP_INDIGENA_LINGUA INT,
-  CO_LINGUA_INDIGENA_1 INT,
-  CO_LINGUA_INDIGENA_2 INT,
-  CO_LINGUA_INDIGENA_3 INT,
-  IN_MATERIAL_PED_INDIGENA INT)
-USING CSV LOCATION 'abfss://silver@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/educacao_basica_2022_silver'
+CREATE TABLE silver.education_basic_2022
+  (YEAR_CENSUS INT NOT NULL,
+  REGION_NAME STRING NOT NULL,
+  STATE_NAME STRING NOT NULL,
+  MESOREGION_NAME STRING NOT NULL,
+  ENTITY_NAME STRING NOT NULL,
+  ENTITY_CODE INTEGER NOT NULL,
+  DEPENDENCY_TYPE INT,
+  SCHOOL_CATEGORY_PRIVATE INT,
+  LOCATION_TYPE INT,
+  QTY_BASIC_STUDENTS INT,
+  QTY_BASIC_STUDENTS_FEMALE INT,
+  QTY_BASIC_STUDENTS_MALE INT,
+  QTY_DVD_EQUIPMENT INT,
+  QTY_TV_EQUIPMENT INT,
+  QTY_DIGITAL_WHITEBOARD_EQUIPMENT INT,
+  QTY_MULTIMEDIA_EQUIPMENT INT,
+  QTY_VCR_EQUIPMENT INT,
+  QTY_SATELLITE_DISH_EQUIPMENT INT,
+  QTY_COPIER_EQUIPMENT INT,
+  QTY_OVERHEAD_PROJECTOR_EQUIPMENT INT,
+  QTY_PRINTER_EQUIPMENT INT,
+  QTY_MULTIFUNCTION_PRINTER_EQUIPMENT INT,
+  QTY_FAX_EQUIPMENT INT,
+  QTY_PHOTO_EQUIPMENT INT,
+  QTY_COMPUTER INT,
+  QTY_ADMINISTRATIVE_COMPUTER INT,
+  QTY_EXISTING_ROOMS INT,
+  HAS_INTERNET INT,
+  HAS_INDIGENOUS_EDUCATION INT,
+  INDIGENOUS_LANGUAGE_TYPE INT,
+  INDIGENOUS_LANGUAGE_CODE_1 INT,
+  INDIGENOUS_LANGUAGE_CODE_2 INT,
+  INDIGENOUS_LANGUAGE_CODE_3 INT,
+  HAS_INDIGENOUS_EDUCATIONAL_MATERIAL INT)
+USING CSV LOCATION 'abfss://silver@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/basic_education_2022_silver'
 OPTIONS (
   header = "true",
   delimiter = ","
 )
 ```
 
-**Table tx_rend_escolas_2022**
+**Table school_retention_rate_2022**
 ```py
-CREATE TABLE silver.tx_rend_escolas_2022 
+CREATE TABLE silver.TX_REND_ESCOLAS_2022 
 (
-  Ano INT NOT NULL, 
-  Regiao STRING NOT NULL,
-  UF STRING NOT NULL,
-  Codigo_do_Municipio INT NOT NULL,
-  Nome_do_Municipio STRING,
-  Codigo_da_Escola INT NOT NULL,
-  Nome_da_Escola STRING,
-  Localizacao STRING,
-  Dependencia_Administrativa STRING,
-  Taxa_de_Aprovacao_Educacao_Basica FLOAT,
-  Taxa_de_Reprovacao_Educacao_Basica FLOAT,
-  Taxa_de_Abandono_Educacao_Basica FLOAT
+  YEAR INT NOT NULL, 
+  REGION STRING NOT NULL,
+  STATE STRING NOT NULL,
+  MUNICIPALITY_CODE INT NOT NULL,
+  MUNICIPALITY_NAME STRING,
+  SCHOOL_CODE INT NOT NULL,
+  SCHOOL_NAME STRING,
+  LOCATION STRING,
+  ADMINISTRATIVE_DEPENDENCY STRING,
+  BASIC_EDUCATION_APPROVAL_RATE FLOAT,
+  BASIC_EDUCATION_REPROVATION_RATE FLOAT,
+  BASIC_EDUCATION_ABANDONMENT_RATE FLOAT
 )
-USING CSV LOCATION 'abfss://silver@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/tx_rend_escolas_2022_silver'
+USING CSV LOCATION 'abfss://silver@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/school_retention_rate_2022_silver'
 OPTIONS (
-  header = "true",
-  delimiter = ","
+  HEADER = "true",
+  DELIMITER = ","
 )
 ```
 
@@ -265,46 +265,46 @@ Description of transformations:
 Finally, it is now possible to perform the final analysis in a much more practical, fast, and consistent way, since we only have usable columns according to the business rules of the analyses.
 
 ``` py
-CREATE TABLE gold.educacao_rend_escolas_joined
+CREATE TABLE gold.EDUCATION_RETENTION_SCHOOLS_JOINED
 (
-  Ano_Censo INT NOT NULL,
-  Regiao STRING NOT NULL,
-  Nome_UF STRING NOT NULL,
-  UF STRING NOT NULL,
-  Nome_do_Municipio STRING,
-  Codigo_do_Municipio INTEGER,
-  Dependencia INTEGER,
-  Dependencia_Administrativa STRING,
-  Localizacao STRING,
-  Tipo_Localizacao INTEGER,
-  Codigo_da_Escola INTEGER NOT NULL,
-  Nome_da_Escola STRING,
-  Categoria_Escola_Privada INTEGER,
-  Localizacao_Diferenciada INTEGER,
-  Matriculas_Eduacao_Basica INTEGER NOT NULL,
-  Matriculas_Educacao_Basica_Femino INTEGER NOT NULL,
-  Matriculas_Educacao_Basica_Masculino INTEGER NOT NULL,
-  Total_Equipamentos INTEGER,
-  Computadores INTEGER,
-  Computadores_Administrativos INTEGER,
-  Salas_Existentes INTEGER,
-  Internet INTEGER,
-  Educacao_Indigena INTEGER,
-  Lingua_Indigena INTEGER,
-  Lingua_Indigena_1 INTEGER,
-  Lingua_Indigena_2 INTEGER,
-  Lingua_Indigena_3 INTEGER,
-  Material_Indigena INTEGER,
-  Taxa_de_Aprovacao_Educacao_Basica FLOAT, 
-  Taxa_de_Reprovacao_Educacao_Basica FLOAT,
-  Taxa_de_Abandono_Educacao_Basica FLOAT,
-  PRIMARY KEY "Codigo_da_Escola"
+  YEAR_CENSUS INT NOT NULL,
+  REGION STRING NOT NULL,
+  STATE_NAME STRING NOT NULL,
+  STATE STRING NOT NULL,
+  MUNICIPALITY_NAME STRING,
+  MUNICIPALITY_CODE INTEGER,
+  DEPENDENCY INTEGER,
+  ADMINISTRATIVE_DEPENDENCY STRING,
+  LOCATION STRING,
+  LOCATION_TYPE INTEGER,
+  SCHOOL_CODE INTEGER NOT NULL,
+  SCHOOL_NAME STRING,
+  PRIVATE_SCHOOL_CATEGORY INTEGER,
+  DISTINCT_LOCATION INTEGER,
+  BASIC_EDUCATION_ENROLLMENTS INTEGER NOT NULL,
+  BASIC_EDUCATION_ENROLLMENTS_FEMALE INTEGER NOT NULL,
+  BASIC_EDUCATION_ENROLLMENTS_MALE INTEGER NOT NULL,
+  TOTAL_EQUIPMENTS INTEGER,
+  COMPUTERS INTEGER,
+  ADMINISTRATIVE_COMPUTERS INTEGER,
+  EXISTING_ROOMS INTEGER,
+  INTERNET INTEGER,
+  INDIGENOUS_EDUCATION INTEGER,
+  INDIGENOUS_LANGUAGE INTEGER,
+  INDIGENOUS_LANGUAGE_1 INTEGER,
+  INDIGENOUS_LANGUAGE_2 INTEGER,
+  INDIGENOUS_LANGUAGE_3 INTEGER,
+  INDIGENOUS_MATERIAL INTEGER,
+  BASIC_EDUCATION_APPROVAL_RATE FLOAT, 
+  BASIC_EDUCATION_REPROVATION_RATE FLOAT,
+  BASIC_EDUCATION_ABANDONMENT_RATE FLOAT,
+  PRIMARY KEY ("SCHOOL_CODE")
 )
 
-USING CSV LOCATION 'abfss://gold@educacaobasica.dfs.core.windows.net/microdados_ed_basica_2022/educacao_rend_escolas_joined'
+USING CSV LOCATION 'abfss://gold@basiceducation.dfs.core.windows.net/microdata_basic_education_2022/education_retention_schools_joined'
 OPTIONS (
-  header = "true",
-  delimiter = ","
+  HEADER = "true",
+  DELIMITER = ","
 )
 ```
 
@@ -312,38 +312,39 @@ OPTIONS (
 A data catalog is a tool that organizes and describes information about available datasets, providing details such as origin, structure, meaning, and relationship between them. It is essential for the management and efficient use of data in an organization. Below is the catalog for the final table in the Gold layer:
 
 
-| id | variavel | descrição | tipo | mínimo | máximo |
-|----|----------|-----------|------|--------|--------|
-| 1 | Ano_Censo | Ano dos dados | INT | 2022 | 2022 |
-| 2 | Região | Região | STRING | Centro-Oeste | Sul |
-| 3 | Nome_UF | Nome do distrito | STRING | Acre | Tocantins |
-| 4 | UF | Unidade Federativa | STRING | AC | TO |
-| 5 | Nome_do_Municipio | Nome do Município | STRING | Abadia de Goiás | ��leo |
-| 6 | Codigo_do_Municipio | Código do Município | INTEGER | 1100015 | 5300108 |
-| 7 | Dependencia | "1 - Federal 2 - Estadual 3 - Municipal 4 - Privada" | INTEGER | 1 | 4 |
-| 9 | Localizacao | Rural ou Urbana | STRING | Rural | Urbana |
-| 10 | Tipo_Localizacao | Rural ou Urbana | INTEGER | 0 | 1 |
-| 11 | Codigo_da_Escola | Código da Escola | INTEGER | 11000058 | 53086007 |
-| 12 | Nome_da_Escola | Nome da Escola | STRING | 0101001 ESCOLA MUNICIPAL VICENTE LICINIO CARDOSO | ZUMBI DOS PALMARES EEF |
-| 13 | Categoria_Escola_Privada | "1 - Particular 2 - Comunitária 3 - Confessional 4 - Filantrópica - Não aplicável para escolas públicas" | INTEGER | 1 | 4 |
-| 14 | Localizacao_Diferenciada | "0 - A escola não está em área de localização diferenciada 1 - Área de assentamento 2 - Terra indígena 3 - Área onde se localiza comunidade remanescente de quilombos" | INTEGER | 0 | 3 |
-| 15 | Matriculas_Educação_Basica | Quantidade de matrículas na educação básica | INTEGER | 1 | 999 |
-| 16 | Matriculas_Educacao_Basica_Feminino | Quantidade de matrículas na educação básica feminino | INTEGER | 0 | 999 |
-| 17 | Matriculas_Educacao_Basica_Masculino | Quantidade de matrículas na educação básica masculino | INTEGER | 0 | 999 |
-| 18 | Total_Equipamentos | Total de equipamentos tecnológicos | INTEGER | 0 | 99 |
-| 19 | Computadores | Total de computadores | INTEGER | null | null |
-| 20 | Computadores_Administrativos | Total de computadores administrativos | INTEGER | null | null |
-| 21 | Salas_Existentes | Quantidade de salas existentes | INTEGER | 0 | 1 |
-| 22 | Internet | Tem ou não internet (1 ou 0) | INTEGER | 0 | 1 |
-| 23 | Educacao_Indigena | "0 - Não 1 - Sim" | INTEGER | 1 | 3 |
-| 24 | Lingua_Indigena | "1 - Somente em Língua Indígena 2 - Somente em Língua Portuguesa 3 - Em Língua Indígena e em Língua Portuguesa - Não aplicável para escolas sem Educação Escolar Indígena" | INTEGER | 1 | 3 |
-| 25 | Lingua_Indigena_1 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 1 | INTEGER | 1 | 999 |
-| 26 | Lingua_Indigena_2 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 2 | INTEGER | 100 | 999 |
-| 27 | Lingua_Indigena_3 | Educação Indígena - Língua em que o ensino é ministrado - Língua Indígena - Código da Língua Indígena 3 | INTEGER | 126 | 999 |
-| 28 | Material_Indigena | Instrumentos e materiais socioculturais e/ou pedagógicos em uso na escola para o desenvolvimento de atividades de ensino e aprendizagem - Indígena | INTEGER | 0 | 1 |
-| 29 | Taxa_de_Aprovacao_Educacao_Basica        | Taxa de aprovação na educação básica            | FLOAT  | null   | null   |
-| 30 | Taxa_de_Reprovacao_Educacao_Basica       | Taxa de reprovação na educação básica           | FLOAT  | null   | null   |
-| 31 | Taxa_de_Abandono_Educacao_Basica         | Taxa de abandono na educação básica             | FLOAT  | 0.0    | 9.0    |
+| ID | VARIABLE | DESCRIPTION | TYPE | MINIMUM | MAXIMUM |
+|----|----------|-------------|------|---------|---------|
+| 1 | YEAR_CENSUS | Year of the data | INT | 2022 | 2022 |
+| 2 | REGION | Region | STRING | Midwest | South |
+| 3 | STATE_NAME | State name | STRING | Acre | Tocantins |
+| 4 | STATE | Federative Unit | STRING | AC | TO |
+| 5 | MUNICIPALITY_NAME | Municipality name | STRING | Abadia de Goiás | Zumbi dos Palmares |
+| 6 | MUNICIPALITY_CODE | Municipality code | INTEGER | 1100015 | 5300108 |
+| 7 | DEPENDENCY | "1 - Federal 2 - State 3 - Municipal 4 - Private" | INTEGER | 1 | 4 |
+| 9 | LOCATION | Rural or Urban | STRING | Rural | Urban |
+| 10 | LOCATION_TYPE | Rural or Urban | INTEGER | 0 | 1 |
+| 11 | SCHOOL_CODE | School code | INTEGER | 11000058 | 53086007 |
+| 12 | SCHOOL_NAME | School name | STRING | 0101001 ESCOLA MUNICIPAL VICENTE LICINIO CARDOSO | ZUMBI DOS PALMARES EEF |
+| 13 | PRIVATE_SCHOOL_CATEGORY | "1 - Private 2 - Community 3 - Confessional 4 - Philanthropic - Not applicable for public schools" | INTEGER | 1 | 4 |
+| 14 | DISTINCT_LOCATION | "0 - The school is not in a distinct location area 1 - Settlement area 2 - Indigenous land 3 - Area where a remnant quilombola community is located" | INTEGER | 0 | 3 |
+| 15 | BASIC_EDUCATION_ENROLLMENTS | Number of enrollments in basic education | INTEGER | 1 | 999 |
+| 16 | BASIC_EDUCATION_ENROLLMENTS_FEMALE | Number of female enrollments in basic education | INTEGER | 0 | 999 |
+| 17 | BASIC_EDUCATION_ENROLLMENTS_MALE | Number of male enrollments in basic education | INTEGER | 0 | 999 |
+| 18 | TOTAL_EQUIPMENTS | Total technological equipment | INTEGER | 0 | 99 |
+| 19 | COMPUTERS | Total computers | INTEGER | null | null |
+| 20 | ADMINISTRATIVE_COMPUTERS | Total administrative computers | INTEGER | null | null |
+| 21 | EXISTING_ROOMS | Number of existing rooms | INTEGER | 0 | 1 |
+| 22 | INTERNET | Has internet or not (1 or 0) | INTEGER | 0 | 1 |
+| 23 | INDIGENOUS_EDUCATION | "0 - No 1 - Yes" | INTEGER | 1 | 3 |
+| 24 | INDIGENOUS_LANGUAGE | "1 - Only in Indigenous Language 2 - Only in Portuguese Language 3 - In Indigenous and Portuguese Language - Not applicable for schools without Indigenous School Education" | INTEGER | 1 | 3 |
+| 25 | INDIGENOUS_LANGUAGE_1 | Indigenous Education - Language in which teaching is conducted - Indigenous Language - Language Code 1 | INTEGER | 1 | 999 |
+| 26 | INDIGENOUS_LANGUAGE_2 | Indigenous Education - Language in which teaching is conducted - Indigenous Language - Language Code 2 | INTEGER | 100 | 999 |
+| 27 | INDIGENOUS_LANGUAGE_3 | Indigenous Education - Language in which teaching is conducted - Indigenous Language - Language Code 3 | INTEGER | 126 | 999 |
+| 28 | INDIGENOUS_MATERIAL | Socio-cultural and/or pedagogical instruments and materials in use in the school for the development of teaching and learning activities - Indigenous | INTEGER | 0 | 1 |
+| 29 | BASIC_EDUCATION_APPROVAL_RATE | Basic education approval rate | FLOAT | null | null |
+| 30 | BASIC_EDUCATION_REPROVATION_RATE | Basic education reprovation rate | FLOAT | null | null |
+| 31 | BASIC_EDUCATION_ABANDONMENT_RATE | Basic education abandonment rate | FLOAT | 0.0 | 9.0 |
+
 
 
 ### 4. Analysis
@@ -354,10 +355,10 @@ Data analysis is an essential practice in an increasingly digital and informatio
 Before delving into the analysis itself, it is crucial to perform an assessment of the data quality contained in the gold layer (final layer) to comprehensively understand how these data may influence the final analyses to be conducted. In this context, our attention will be dedicated to identifying possible inconsistencies or flaws in the data, aiming to ensure that subsequent analyses are based on reliable information.
 
 There are still some issues with the data quality for certain columns.
-The column **Nome_do_Municipio** is still obtaining the value "�" for letters with accents or for the letter "ç" ("still" because this issue was addressed in the ETL from Bronze to Silver layer). Since these are only naming problems, it will not affect the answers provided below. However, in the case of creating a data visualization dashboard, for example, a map chart with "�" characters, Power BI will not be able to identify the municipality's location.
-The column **Taxa_de_Aprovacao_Educacao_Basica** has null values throughout the ETL process for some reason. This prevents analyses related to student approval in indigenous schools, a comparison between approvals with students in indigenous areas and regular schools from being performed.
-The column **Salas_Existentes** also has null values, possibly due to some stage of the ETL process. This prevents analyses on the number of students per classroom in schools in indigenous areas or checks if the infrastructure of schools in indigenous areas meets the population's needs.
-The columns **Computadores** and **Computadores_Administrativos** are also null, possibly due to some stage of the ETL process. This prevents answering questions regarding computers in indigenous schools ("Does the presence of computers in indigenous schools have any influence on the dropout rate?") and may bias the results regarding technological equipment.
+The column **MUNICIPALITY_NAME** is still obtaining the value "�" for letters with accents or for the letter "ç" ("still" because this issue was addressed in the ETL from Bronze to Silver layer). Since these are only naming problems, it will not affect the answers provided below. However, in the case of creating a data visualization dashboard, for example, a map chart with "�" characters, Power BI will not be able to identify the municipality's location.
+The column **BASIC_EDUCATION_APPROVAL_RATE** has null values throughout the ETL process for some reason. This prevents analyses related to student approval in indigenous schools, a comparison between approvals with students in indigenous areas and regular schools from being performed.
+The column **EXISTING_ROOMS** also has null values, possibly due to some stage of the ETL process. This prevents analyses on the number of students per classroom in schools in indigenous areas or checks if the infrastructure of schools in indigenous areas meets the population's needs.
+The columns **COMPUTERS** and **ADMINISTRATIVE_COMPUTERS** are also null, possibly due to some stage of the ETL process. This prevents answering questions regarding computers in indigenous schools ("Does the presence of computers in indigenous schools have any influence on the dropout rate?") and may bias the results regarding technological equipment.
 For the remaining data, no issues were found. However, it would be interesting to remove some columns to improve data processing in queries since not all columns were used.
 
 
@@ -369,7 +370,7 @@ Throughout this section, there will be charts and analyses addressing key questi
 **1. Where are located the indiginous schools in Brazil?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
   
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/loc_escolas_indigenas.PNG" align="left"
      alt="loc_escola_indigena">
@@ -401,7 +402,7 @@ Therefore, schools in indigenous lands are mainly concentrated in the states of 
 **2. What is the dropout rate in indigenous schools? Is this value higher or lower than regular schools?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
   
 <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/Taxa_de_Abandono.PNG" align="left"
      alt="taxa_de_abandono">
@@ -446,7 +447,7 @@ Response: The dropout rate in indigenous schools is 18.59%, while in regular sch
 **3. What is the average number of technological equipment per state in schools with indigenous education?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/media_equip_escolas_por_estado.PNG" align="left"
      alt="media_equipamentos_estado">
@@ -473,7 +474,7 @@ Answer: The above graph shows the average number of technological equipment avai
 **4. What is the percentage of schools in indigenous locations that have internet access by state?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/porcentagem_escolas_indigenas_com_internet.PNG" align="left"
@@ -499,7 +500,7 @@ Answer: The above numbers represent the percentage of indigenous schools in each
 **5. In which language are subjects taught in indigenous schools? Are we maintaining the roots of the tribes regarding the mother tongue?**
 
 <details>
-  <summary>Mostrar Resposta</summary>
+  <summary>Show Answer</summary>
 
 
   <img src="https://github.com/bbucalonserra/data_engineering/blob/main/graphics/linguas_indigenas.PNG" align="left"
