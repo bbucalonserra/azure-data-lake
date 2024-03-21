@@ -69,8 +69,7 @@ With this setup, the collected data was stored in the Bronze container. Subseque
 
 
 <div align="center">
-  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG" alt="Arquivos Armazenados na Camada Bronze" />
-  <p><em>Arquivos Armazenados na Camada Bronze</em></p>
+  <img src="https://github.com/bbucalonserra/data_engineering/blob/main/pictures/coleta_bronze_layer.PNG" alt="ARCHIEVES STORED IN THE BRONZE LAYER" />
 </div>
 
 
