@@ -1,4 +1,4 @@
-# Data Engineering Project
+# Data Lake Creation - Azure
 A data engineering project involves designing, constructing, and maintaining the infrastructure necessary for the collection, storage, processing, and analysis of data. These projects often require expertise in programming languages like Python and usage of technologies like cloud-based solutions such as Azure, AWS or Google Cloud Platform. Data engineering is crucial for enabling organizations to derive insights, make data-driven decisions and build data-driven applications.
 
 # Index
